@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 include_once $this->targetDirs[3].'/vendor/symfony/console/Command/Command.php';
 include_once $this->targetDirs[3].'/vendor/symfony/web-server-bundle/Command/ServerRunCommand.php';
 
-$this->privates['web_server.command.server_run'] = $instance = new \Symfony\Bundle\WebServerBundle\Command\ServerRunCommand(($this->targetDirs[3].'/public'), 'dev', $this->targetDirs[3]);
+$this->privates['web_server.command.server_run'] = $instance = new \Symfony\Bundle\WebServerBundle\Command\ServerRunCommand(($this->targetDirs[3].'/public'), 'dev', $this->targetDirs[1]);
 
 $instance->setName('server:run');
 
