@@ -10,6 +10,8 @@
                 'classes' => [
                     [
                         'App\\Entity\\Transaction',
+                        'App\\Entity\\UserPrestataire',
+                        'App\\Entity\\EntreprisePrestataire',
                         'App\\Entity\\ComptePrestataire',
                         'App\\Entity\\UserSystem',
                     ],

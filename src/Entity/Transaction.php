@@ -19,92 +19,76 @@ class Transaction
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $depot;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $retrait;
+    private $transactionType;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateDepot;
+    private $dateTransaction;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateRetrait;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ComptePrestataire", inversedBy="historique")
+     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="transactions")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $transaction;
+    private $matEntreprise;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ComptePrestataire", inversedBy="transaction")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $comptePrestataire;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDepot(): ?int
+    public function getTransactionType(): ?string
     {
-        return $this->depot;
+        return $this->transactionType;
     }
 
-    public function setDepot(int $depot): self
+    public function setTransactionType(string $transactionType): self
     {
-        $this->depot = $depot;
+        $this->transactionType = $transactionType;
 
         return $this;
     }
 
-    public function getRetrait(): ?int
+    public function getDateTransaction(): ?\DateTimeInterface
     {
-        return $this->retrait;
+        return $this->dateTransaction;
     }
 
-    public function setRetrait(int $retrait): self
+    public function setDateTransaction(\DateTimeInterface $dateTransaction): self
     {
-        $this->retrait = $retrait;
+        $this->dateTransaction = $dateTransaction;
 
         return $this;
     }
 
-    public function getDateDepot(): ?\DateTimeInterface
+    public function getMatEntreprise(): ?EntreprisePrestataire
     {
-        return $this->dateDepot;
+        return $this->matEntreprise;
     }
 
-    public function setDateDepot(\DateTimeInterface $dateDepot): self
+    public function setMatEntreprise(?EntreprisePrestataire $matEntreprise): self
     {
-        $this->dateDepot = $dateDepot;
+        $this->matEntreprise = $matEntreprise;
 
         return $this;
     }
 
-    public function getDateRetrait(): ?\DateTimeInterface
+    public function getComptePrestataire(): ?ComptePrestataire
     {
-        return $this->dateRetrait;
+        return $this->comptePrestataire;
     }
 
-    public function setDateRetrait(\DateTimeInterface $dateRetrait): self
+    public function setComptePrestataire(?ComptePrestataire $comptePrestataire): self
     {
-        $this->dateRetrait = $dateRetrait;
-
-        return $this;
-    }
-
-    public function getTransaction(): ?ComptePrestataire
-    {
-        return $this->transaction;
-    }
-
-    public function setTransaction(?ComptePrestataire $transaction): self
-    {
-        $this->transaction = $transaction;
+        $this->comptePrestataire = $comptePrestataire;
 
         return $this;
     }

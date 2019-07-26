@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EntreprisePrestataireRepository")
  */
 class EntreprisePrestataire
@@ -21,12 +23,12 @@ class EntreprisePrestataire
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $matricule;
+    private $nomComplet;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomComplet;
+    private $matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,35 +46,24 @@ class EntreprisePrestataire
     private $adress;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserPrestataire", mappedBy="matPrestataire")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserPrestataire", mappedBy="mat_entreprise")
      */
-    private $matPrestataire;
+    private $userPrestataires;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ComptePrestataire", mappedBy="matEntreprise", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="matEntreprise")
      */
-    private $solde;
+    private $transactions;
 
     public function __construct()
     {
-        $this->matPrestataire = new ArrayCollection();
+        $this->userPrestataires = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMatricule(): ?string
-    {
-        return $this->matricule;
-    }
-
-    public function setMatricule(string $matricule): self
-    {
-        $this->matricule = $matricule;
-
-        return $this;
     }
 
     public function getNomComplet(): ?string
@@ -83,6 +74,18 @@ class EntreprisePrestataire
     public function setNomComplet(string $nomComplet): self
     {
         $this->nomComplet = $nomComplet;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
 
         return $this;
     }
@@ -126,46 +129,60 @@ class EntreprisePrestataire
     /**
      * @return Collection|UserPrestataire[]
      */
-    public function getMatPrestataire(): Collection
+    public function getUserPrestataires(): Collection
     {
-        return $this->matPrestataire;
+        return $this->userPrestataires;
     }
 
-    public function addMatPrestataire(UserPrestataire $matPrestataire): self
+    public function addUserPrestataire(UserPrestataire $userPrestataire): self
     {
-        if (!$this->matPrestataire->contains($matPrestataire)) {
-            $this->matPrestataire[] = $matPrestataire;
-            $matPrestataire->setMatPrestataire($this);
+        if (!$this->userPrestataires->contains($userPrestataire)) {
+            $this->userPrestataires[] = $userPrestataire;
+            $userPrestataire->setMatEntreprise($this);
         }
 
         return $this;
     }
 
-    public function removeMatPrestataire(UserPrestataire $matPrestataire): self
+    public function removeUserPrestataire(UserPrestataire $userPrestataire): self
     {
-        if ($this->matPrestataire->contains($matPrestataire)) {
-            $this->matPrestataire->removeElement($matPrestataire);
+        if ($this->userPrestataires->contains($userPrestataire)) {
+            $this->userPrestataires->removeElement($userPrestataire);
             // set the owning side to null (unless already changed)
-            if ($matPrestataire->getMatPrestataire() === $this) {
-                $matPrestataire->setMatPrestataire(null);
+            if ($userPrestataire->getMatEntreprise() === $this) {
+                $userPrestataire->setMatEntreprise(null);
             }
         }
 
         return $this;
     }
 
-    public function getSolde(): ?ComptePrestataire
+    /**
+     * @return Collection|Transaction[]
+     */
+    public function getTransactions(): Collection
     {
-        return $this->solde;
+        return $this->transactions;
     }
 
-    public function setSolde(ComptePrestataire $solde): self
+    public function addTransaction(Transaction $transaction): self
     {
-        $this->solde = $solde;
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setMatEntreprise($this);
+        }
 
-        // set the owning side of the relation if necessary
-        if ($this !== $solde->getMatEntreprise()) {
-            $solde->setMatEntreprise($this);
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+            // set the owning side to null (unless already changed)
+            if ($transaction->getMatEntreprise() === $this) {
+                $transaction->setMatEntreprise(null);
+            }
         }
 
         return $this;

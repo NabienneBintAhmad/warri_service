@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\UserPrestataireRepository")
  */
 class UserPrestataire
@@ -29,7 +31,7 @@ class UserPrestataire
     /**
      * @ORM\Column(type="integer")
      */
-    private $telephone;
+    private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,10 +44,10 @@ class UserPrestataire
     private $adress;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="matPrestataire")
+     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="userPrestataires")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $matPrestataire;
+    private $mat_entreprise;
 
     public function getId(): ?int
     {
@@ -76,14 +78,14 @@ class UserPrestataire
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTel(): ?int
     {
-        return $this->telephone;
+        return $this->tel;
     }
 
-    public function setTelephone(int $telephone): self
+    public function setTel(int $tel): self
     {
-        $this->telephone = $telephone;
+        $this->tel = $tel;
 
         return $this;
     }
@@ -112,14 +114,14 @@ class UserPrestataire
         return $this;
     }
 
-    public function getMatPrestataire(): ?EntreprisePrestataire
+    public function getMatEntreprise(): ?EntreprisePrestataire
     {
-        return $this->matPrestataire;
+        return $this->mat_entreprise;
     }
 
-    public function setMatPrestataire(?EntreprisePrestataire $matPrestataire): self
+    public function setMatEntreprise(?EntreprisePrestataire $mat_entreprise): self
     {
-        $this->matPrestataire = $matPrestataire;
+        $this->mat_entreprise = $mat_entreprise;
 
         return $this;
     }

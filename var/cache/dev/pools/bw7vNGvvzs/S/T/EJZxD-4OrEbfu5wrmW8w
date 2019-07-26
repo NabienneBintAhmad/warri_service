@@ -10,11 +10,10 @@
                 'properties' => [
                     [
                         'id',
-                        'depot',
-                        'retrait',
-                        'dateDepot',
-                        'dateRetrait',
-                        'transaction',
+                        'transactionType',
+                        'dateTransaction',
+                        'matEntreprise',
+                        'comptePrestataire',
                     ],
                 ],
             ],

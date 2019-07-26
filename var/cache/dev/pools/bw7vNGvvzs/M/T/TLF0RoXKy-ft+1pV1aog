@@ -11,8 +11,8 @@
                     [
                         'id',
                         'matEntreprise',
-                        'solde',
-                        'historique',
+                        'somme',
+                        'transaction',
                     ],
                 ],
             ],

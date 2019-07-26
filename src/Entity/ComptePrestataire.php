@@ -21,7 +21,7 @@ class ComptePrestataire
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="matricule", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\EntreprisePrestataire", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $matEntreprise;
@@ -29,16 +29,16 @@ class ComptePrestataire
     /**
      * @ORM\Column(type="integer")
      */
-    private $solde;
+    private $somme;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="transaction")
+     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="comptePrestataire")
      */
-    private $historique;
+    private $transaction;
 
     public function __construct()
     {
-        $this->historique = new ArrayCollection();
+        $this->transaction = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,14 +58,14 @@ class ComptePrestataire
         return $this;
     }
 
-    public function getSolde(): ?int
+    public function getSomme(): ?int
     {
-        return $this->solde;
+        return $this->somme;
     }
 
-    public function setSolde(int $solde): self
+    public function setSomme(int $somme): self
     {
-        $this->solde = $solde;
+        $this->somme = $somme;
 
         return $this;
     }
@@ -73,28 +73,28 @@ class ComptePrestataire
     /**
      * @return Collection|Transaction[]
      */
-    public function getHistorique(): Collection
+    public function getTransaction(): Collection
     {
-        return $this->historique;
+        return $this->transaction;
     }
 
-    public function addHistorique(Transaction $historique): self
+    public function addTransaction(Transaction $transaction): self
     {
-        if (!$this->historique->contains($historique)) {
-            $this->historique[] = $historique;
-            $historique->setTransaction($this);
+        if (!$this->transaction->contains($transaction)) {
+            $this->transaction[] = $transaction;
+            $transaction->setComptePrestataire($this);
         }
 
         return $this;
     }
 
-    public function removeHistorique(Transaction $historique): self
+    public function removeTransaction(Transaction $transaction): self
     {
-        if ($this->historique->contains($historique)) {
-            $this->historique->removeElement($historique);
+        if ($this->transaction->contains($transaction)) {
+            $this->transaction->removeElement($transaction);
             // set the owning side to null (unless already changed)
-            if ($historique->getTransaction() === $this) {
-                $historique->setTransaction(null);
+            if ($transaction->getComptePrestataire() === $this) {
+                $transaction->setComptePrestataire(null);
             }
         }
 

@@ -11,9 +11,6 @@
                 'targetEntity' => [
                     'App\\Entity\\EntreprisePrestataire',
                 ],
-                'inversedBy' => [
-                    'matricule',
-                ],
                 'cascade' => [
                     [
                         'persist',
