@@ -87,7 +87,9 @@ class WarriController extends AbstractController
             }
         }
 
-        /**
+// ============================================== SYSTEM
+
+    /**
      * @Route("/system/show/", name="all_user_system")
      */
     public function allus(SerializerInterface $ser){
@@ -152,6 +154,8 @@ class WarriController extends AbstractController
         return new JsonResponse("Deleted");
     }
 
+// ============================================== PRESTATAIRE
+
     /**
      * @Route("/prest/add", name="add_prestataire",methods={"POST"}) 
      */
@@ -183,5 +187,52 @@ class WarriController extends AbstractController
         return new jsonResponse("succesfull !");
     }
 
+    /**
+     * @Route("/prest/user/add")
+     */
+    public function add_user_prestataire(){
+     
+        
+        return new jsonResponse("Succes");
+    }
 
+    /**
+     * @Route("/prest/user/show")
+     */
+    public function show_user_prestataire(){
+     
+
+        return new jsonResponse("Succes");
+    }
+
+    /**
+     * @Route("/prest/user/show/{id}")
+     */
+    public function show_one_user_prestataire(){
+     
+
+        return new jsonResponse("Succes");
+    }
+
+// ============================================== Compte
+
+    /**
+     * @Route("/compte/show/")
+     */
+    public function show_compte(){
+     
+
+        return new jsonResponse("Succes");
+    }
+
+    /**
+     * @Route("/compte/show/{id}")
+     */
+    public function show_one_compte(){
+     
+
+        return new jsonResponse("Succes");
+    }
+
+    
 }
