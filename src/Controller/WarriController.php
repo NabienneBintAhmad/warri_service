@@ -234,5 +234,4 @@ class WarriController extends AbstractController
         return new jsonResponse("Succes");
     }
 
-    
 }
