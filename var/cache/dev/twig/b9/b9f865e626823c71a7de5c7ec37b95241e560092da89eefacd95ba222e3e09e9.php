@@ -1828,6 +1828,6 @@ class __TwigTemplate_874f88d5550f969deb35519a4f2d1e9b72e024ee1cf25f393a3e81c1fac
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/var/www/html/my symphon/warri_service/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

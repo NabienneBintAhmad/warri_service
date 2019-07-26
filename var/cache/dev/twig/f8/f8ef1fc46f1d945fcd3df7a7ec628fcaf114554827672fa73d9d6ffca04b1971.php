@@ -375,6 +375,6 @@ class __TwigTemplate_77e453dd3450c37485507b32f8b5577e40f4b1c97bead8b851cf620803b
 
 </body>
 </html>
-", "@ApiPlatform/SwaggerUi/index.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
+", "@ApiPlatform/SwaggerUi/index.html.twig", "/var/www/html/my symphon/warri_service/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
     }
 }

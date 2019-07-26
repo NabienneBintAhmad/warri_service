@@ -18,7 +18,6 @@ return [
             [['_route' => 'register', '_controller' => 'App\\Controller\\WarriController::register'], null, ['POST' => 0, 'GET' => 1], null, false, false, null],
         ],
         '/api/warri' => [[['_route' => 'warri', '_controller' => 'App\\Controller\\WarriController::index'], null, null, null, false, false, null]],
-        '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
