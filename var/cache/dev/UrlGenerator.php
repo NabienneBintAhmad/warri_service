@@ -30,6 +30,7 @@ return [
     'show_compte' => [[], ['_controller' => 'App\\Controller\\WarriController::show_compte'], [], [['text', '/api/compte/show']], [], []],
     'add_compte' => [[], ['_controller' => 'App\\Controller\\WarriController::add_compte'], [], [['text', '/api/compte/add']], [], []],
     'add_transaction' => [[], ['_controller' => 'App\\Controller\\WarriController::add_transaction'], [], [['text', '/api/transaction/add']], [], []],
+    'show_transaction' => [['cmpt'], ['_controller' => 'App\\Controller\\WarriController::show_trans'], [], [['variable', '/', '[^/]++', 'cmpt', true], ['text', '/api/transaction/show']], [], []],
     'api_entrypoint' => [['index', '_format'], ['_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index' => 'index'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', 'index', 'index', true], ['text', '/api']], [], []],
     'api_doc' => [['_format'], ['_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], [], [['variable', '.', '[^/]++', '_format', true], ['text', '/api/docs']], [], []],
     'api_jsonld_context' => [['shortName', '_format'], ['_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName' => '.+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '.+', 'shortName', true], ['text', '/api/contexts']], [], []],

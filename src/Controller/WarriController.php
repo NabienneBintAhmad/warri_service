@@ -23,6 +23,7 @@ use App\Entity\UserPrestataire;
 use App\Entity\ComptePrestataire;
 use App\Entity\Transaction;
 use Symfony\Component\Validator\Constraints\Date;
+use \DateTime;
 
 /**
      * @Route("/api")
@@ -295,6 +296,41 @@ class WarriController extends AbstractController
 
 
 
-    
+    /**
+     * @Route("/transaction/add",name="add_transaction",methods={"POST"})
+     */
+    public function add_transaction(Request $request){
+        $data = $request->getContent();
+        $data = json_decode($data,true);
+        // var_dump($data);
+        // $date = ($data['date']);
+        // var_dump($date);
 
+        $trans = new Transaction;
+        $trans->setCompte($data['compte']);
+        $trans->setType($data['type']);
+        $trans->setMontant($data['montant']);
+        // $trans->setDate( new \DateTime ($data['date']));
+        $trans->setDate( new \DateTime('now'));
+        var_dump($trans);
+
+        // $em = $this->getDoctrine()->getmanager();
+        // $em->persist($trans);
+        // $em->flush();
+
+        return new Response ("response ");
+    }// done !
+
+
+    /**
+     * @Route("/transaction/show/{cmpt}",name="show_transaction")
+     */
+
+     public function show_trans(Request $req,$cmpt){
+         $data = $req->getContent();
+        //  $transactions = $this->getDoctrine()->getRepository(Transactions::class)->findByCompte($cmpt);
+         var_dump($data);
+
+         return new Response("ok");
+     }
 }
