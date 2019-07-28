@@ -98,17 +98,17 @@ class WarriController extends AbstractController
         $users_serialized =  $this->get('serializer')->serialize($users, 'json');
         $response = new Response($users_serialized);
         return($response);
-    }
+    } // done !
 
     /**
      * @Route("/system/show/{id}", name="one_user_system")
      */
-    public function oneus(SerializerInterface $ser,$id){
+    public function one_us(SerializerInterface $ser,$id){
         $users = $this->getDoctrine()->getRepository(UserSystemes::class)->find($id);
         $users_serialized =  $this->get('serializer')->serialize($users, 'json');
         $response = new Response($users_serialized);
         return($response);
-    }
+    } // done !
 
     /**
      * @Route("/system/add", name="add_user_sys",methods={"POST"})
@@ -116,11 +116,11 @@ class WarriController extends AbstractController
 
     public function system_add_user (Request $request){
         
-        $data = json_decode($request->getContent(),true);
-        // $dump = $request->getContent();
+        $data = $request->getContent();
+        $data = json_decode($data,true);
+        // var_dump($data);
         
         $dump = new UserSystemes;
-    
         $dump->setNom($data['nom']);
         $dump->setPrenom($data['prenom']);
         $dump->setEmail($data['email']);
@@ -139,15 +139,7 @@ class WarriController extends AbstractController
         $em->flush();
 
         return new jsonResponse("succesfull !");
-    }
-
-    /**
-     *@Route("/system/block/1",name="") 
-     */
-
-    public function delete_user_system($id){
-      
-    }
+    } // done !
 
 // ============================================== PRESTATAIRE
 
@@ -161,26 +153,22 @@ class WarriController extends AbstractController
             ->getQuery();
         $maxidresult = $idrep ->getResult();
         $maxid = ($maxidresult[0][1] + 1);
-        // print_r($maxidresult[0][1]);
 
         $data = json_decode($request->getContent(),true);
         $mat.="/P".$maxid;
         $prestataire = new EntreprisePrestataire;
         $prestataire->setMatricule($mat);
-        $prestataire->setNomComplet($data['nom_complet']);
+        $prestataire->setDenomination($data['denome']);
         $prestataire->setEmail($data['email']);
-        $prestataire->setContact($data['contact']);
+        $prestataire->setContacte($data['contact']);
         $prestataire->setAdress($data['adress']);
-
-        var_dump($prestataire);
-        // echo($mat);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($prestataire);
         $em->flush();
 
         return new jsonResponse("succesfull !");
-    }
+    } // done !
 
     /**
      * @Route("/prest/show", name="show_prestataire") 
@@ -193,7 +181,7 @@ class WarriController extends AbstractController
 
         // var_dump($prestataires);
         return new Response($prest_serialized);
-    }
+    } // done !
 
     /**
      * @Route("/prest/user/add",name="add_user_prestataire",methods={"POST"})
@@ -216,7 +204,7 @@ class WarriController extends AbstractController
 
         // var_dump($prestataires);
         return new Response($user_serialized);
-    }
+    } // done !
 
     
 
@@ -231,7 +219,7 @@ class WarriController extends AbstractController
 
         // var_dump($prestataires);
         return new Response($user_serialized);
-    }
+    } // done !
 
 // ============================================== Compte
     
@@ -244,6 +232,6 @@ class WarriController extends AbstractController
 
         $compte_serialized = $this->get('serializer')->serialize($compte,'json');
         return new Response($compte_serialized);
-    }
+    } // done !
 
 }

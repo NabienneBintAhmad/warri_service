@@ -1,1 +1,0 @@
-<?php return [PHP_INT_MAX, 'api_compte_prestataires_get_item'];
