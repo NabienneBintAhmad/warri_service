@@ -21,6 +21,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use phpDocumentor\Reflection\Types\This;
 use App\Entity\UserPrestataire;
 use App\Entity\ComptePrestataire;
+use App\Entity\Transaction;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
      * @Route("/api")
@@ -179,17 +181,51 @@ class WarriController extends AbstractController
 
         $prest_serialized = $this->get('serializer')->serialize($prestataires,'json');
 
-        // var_dump($prestataires);
         return new Response($prest_serialized);
     } // done !
+
+     /**
+     * @Route("/prest/show/{id}", name="show_one_prestataire") 
+     */
+    public function show_one_prestataire(Request $request,$id){
+        $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
+        $prestataires = $prestatairerep->find($id);
+
+        $prest_serialized = $this->get('serializer')->serialize($prestataires,'json');
+
+        return new Response($prest_serialized);
+    } // done !
+
 
     /**
      * @Route("/prest/user/add",name="add_user_prestataire",methods={"POST"})
      */
     public function add_user_prestataire(Request $request){
+        $data = $request->getContent();
+        $data = json_decode($data,true);
+
+        $the_id = $this->getDoctrine()->getRepository(EntreprisePrestataire::class)->findByMatricule($data['matricule']);
+        // $the_id_serialized = $this->get('serializer')->serialize($the_id,'json');
+        // $mat_id = ($the_id);
+        $mat_id = ($the_id[0]);
+
+        $user = new UserPrestataire;
+        $user->setMatricule($mat_id);
+        $user->setNom($data['nom']);
+        $user->setPrenom($data['prenom']);
+        $user->setTelephone($data['tel']);
+        $user->setEmail($data['email']);
+        $user->setAdresse($data['adress']);
+
+        // var_dump($user->getMatricule()->GetEmail());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user); 
+        $em->flush(); 
        
         return new jsonResponse("Succes");
-    }
+
+    }// done !
 
 
 
@@ -233,5 +269,32 @@ class WarriController extends AbstractController
         $compte_serialized = $this->get('serializer')->serialize($compte,'json');
         return new Response($compte_serialized);
     } // done !
+
+    /**
+     * @Route("/compte/add",name="add_compte")
+     */
+    public function add_compte(Request $request){
+        $data = $request->getContent();
+        $data = json_decode($data,true);
+        $the_mat = $this->getDoctrine()->getRepository(EntreprisePrestataire::class)->findByMatricule($data['matricule'] );
+        // var_dump($the_mat);
+        // var_dump($the_mat[0]->getEmail());
+
+        $compte = new ComptePrestataire;
+
+        $compte->setMatricule($the_mat[0]);
+        $compte->setSolde($data['solde']);
+        // var_dump($compte);
+
+        $em = $this->getDoctrine()->getmanager();
+        $em->persist($compte);
+        $em->flush();
+
+        return new Response ("response ");
+    }//done !
+
+
+
+    
 
 }

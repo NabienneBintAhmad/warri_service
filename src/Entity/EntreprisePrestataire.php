@@ -26,7 +26,9 @@ class EntreprisePrestataire
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Matricule;
+    // private $Matricule;
+
+    private $matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -62,7 +64,7 @@ class EntreprisePrestataire
 
     public function getMatricule(): ?string
     {
-        return $this->Matricule;
+        return $this->matricule;
     }
 
     public function setMatricule(string $Matricule): self

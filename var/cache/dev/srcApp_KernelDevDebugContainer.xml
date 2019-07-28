@@ -5081,16 +5081,16 @@
         <argument key="ser" type="service" id="serializer"/>
       </argument>
     </service>
-    <service id=".service_locator.z03Akqp" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.JCCVcaZ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\LoginController::register" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\WarriController::allus" type="service" id=".service_locator.2bmvfb0"/>
-        <argument key="App\Controller\WarriController::oneus" type="service" id=".service_locator.2bmvfb0"/>
+        <argument key="App\Controller\WarriController::one_us" type="service" id=".service_locator.2bmvfb0"/>
         <argument key="App\Controller\WarriController::register" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\LoginController:register" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\WarriController:allus" type="service" id=".service_locator.2bmvfb0"/>
-        <argument key="App\Controller\WarriController:oneus" type="service" id=".service_locator.2bmvfb0"/>
+        <argument key="App\Controller\WarriController:one_us" type="service" id=".service_locator.2bmvfb0"/>
         <argument key="App\Controller\WarriController:register" type="service" id=".service_locator.H3qnu8f"/>
       </argument>
     </service>
@@ -5352,12 +5352,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.z03Akqp"/>
+      <argument type="service" id=".service_locator.JCCVcaZ"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.z03Akqp"/>
+      <argument type="service" id=".service_locator.JCCVcaZ"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -5814,7 +5814,7 @@
     <service id="fos_rest.inflector" alias="fos_rest.inflector.doctrine"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default" public="false"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.z03Akqp"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.JCCVcaZ"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>

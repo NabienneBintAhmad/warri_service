@@ -22,6 +22,8 @@ class UserPrestataire
      * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire")
      * @ORM\JoinColumn(nullable=false)
      */
+    // private $matricule;
+
     private $Matricule;
 
     /**
