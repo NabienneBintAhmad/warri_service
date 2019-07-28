@@ -71,6 +71,6 @@ class __TwigTemplate_33666e3b413abdd500a1ff48183433b293068979097d52528dfef34cc77
     <?php if (strlen(\$value) > 0): ?> value=\"<?php echo \$view->escape(\$value) ?>\"<?php endif ?>
     <?php if (\$checked): ?> checked=\"checked\"<?php endif ?>
 />
-", "@Framework/Form/checkbox_widget.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/checkbox_widget.html.php");
+", "@Framework/Form/checkbox_widget.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/checkbox_widget.html.php");
     }
 }

@@ -135,6 +135,6 @@ class __TwigTemplate_53363b092408b3c6ab1bc42508fa1e103d12f25ac4510aae83df702358b
 .exception-message-wrapper .container {
     min-height: auto;
 }
-", "@WebProfiler/Collector/exception.css.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.css.twig");
+", "@WebProfiler/Collector/exception.css.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.css.twig");
     }
 }

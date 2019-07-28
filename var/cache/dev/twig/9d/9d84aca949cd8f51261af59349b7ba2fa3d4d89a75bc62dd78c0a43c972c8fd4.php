@@ -63,6 +63,6 @@ class __TwigTemplate_6b7d96aa63685497dce4591741cb8f6163db95b771a3c8c91f503c8cf61
     public function getSourceContext()
     {
         return new Source("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#AAA\" d=\"M11.6.4A8 8 0 0 0 5.2 13L.8 17.5a1.3 1.3 0 0 0-.4.9c0 .3.1.6.4.9s.5.3.9.3c.3 0 .6 0 .9-.3l4.3-4.5a7.9 7.9 0 0 0 4.7 1.5 8 8 0 0 0 0-16zm5.5 8a5.5 5.5 0 0 1-5.5 5.4 5.5 5.5 0 1 1 5.5-5.5z\"/></svg>
-", "@WebProfiler/Icon/search.svg", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/web-profiler-bundle/Resources/views/Icon/search.svg");
+", "@WebProfiler/Icon/search.svg", "/var/www/html/my symphon/warri_service/vendor/symfony/web-profiler-bundle/Resources/views/Icon/search.svg");
     }
 }

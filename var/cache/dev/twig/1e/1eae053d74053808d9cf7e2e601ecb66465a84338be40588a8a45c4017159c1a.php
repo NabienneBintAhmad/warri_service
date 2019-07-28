@@ -69,6 +69,6 @@ class __TwigTemplate_b3654e09c62cc60d2938ace7666974934153853759f63b1529d2edd7f41
     public function getSourceContext()
     {
         return new Source("{{ { 'error': { 'code': status_code, 'message': status_text } }|json_encode|raw }}
-", "@Twig/Exception/error.json.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bundle/Resources/views/Exception/error.json.twig");
+", "@Twig/Exception/error.json.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bundle/Resources/views/Exception/error.json.twig");
     }
 }

@@ -156,6 +156,6 @@ class __TwigTemplate_3ea0fdd1dd2f138759402e3f778bfa9347bb143f3c682e137e462541326
     <h2>{{ messages[about].title }}</h2>
     <p>{{ messages[about].message }}</p>
 {% endblock %}
-", "@WebProfiler/Profiler/info.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/info.html.twig");
+", "@WebProfiler/Profiler/info.html.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/info.html.twig");
     }
 }

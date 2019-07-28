@@ -77,6 +77,6 @@ class __TwigTemplate_246c0e032bea20521baae80f68ccbbfa7cf61fcd4d339720c392267d6ef
 <?php printf('%s=\"%s\" ', \$view->escape(\$k), \$view->escape(\$v)) ?>
 <?php endif ?>
 <?php endforeach ?>
-", "@Framework/Form/choice_attributes.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/choice_attributes.html.php");
+", "@Framework/Form/choice_attributes.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/choice_attributes.html.php");
     }
 }

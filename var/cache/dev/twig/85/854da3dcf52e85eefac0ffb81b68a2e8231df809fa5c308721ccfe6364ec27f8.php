@@ -63,6 +63,6 @@ class __TwigTemplate_cc8f45f24a5e02dd154dd265fa28544965ae8858bc0a4951607c5cf276e
     public function getSourceContext()
     {
         return new Source("<?php echo \$view['form']->widget(\$form) ?>
-", "@Framework/Form/hidden_row.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/hidden_row.html.php");
+", "@Framework/Form/hidden_row.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/hidden_row.html.php");
     }
 }

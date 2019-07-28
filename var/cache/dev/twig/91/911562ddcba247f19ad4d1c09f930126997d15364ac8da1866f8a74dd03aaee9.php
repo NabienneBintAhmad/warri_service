@@ -75,6 +75,6 @@ class __TwigTemplate_5e8ec828ef5d14133364c14af1ddc7d81ad8432cb2992bd267a3adc88aa
     <?php echo \$view['form']->widget(\$form, \$widgetAttr); ?>
     <?php echo \$view['form']->help(\$form); ?>
 </div>
-", "@Framework/Form/form_row.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/form_row.html.php");
+", "@Framework/Form/form_row.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/form_row.html.php");
     }
 }

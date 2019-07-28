@@ -67,6 +67,6 @@ class __TwigTemplate_8baabc67998daae10107ac2aa5d4b6f6ab8d2a5af988547ea994a4e6eb1
         return new Source("<?php echo \$view['form']->start(\$form) ?>
     <?php echo \$view['form']->widget(\$form) ?>
 <?php echo \$view['form']->end(\$form) ?>
-", "@Framework/Form/form.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/form.html.php");
+", "@Framework/Form/form.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/form.html.php");
     }
 }

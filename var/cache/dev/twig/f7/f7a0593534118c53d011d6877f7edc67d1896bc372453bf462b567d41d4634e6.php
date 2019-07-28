@@ -59,6 +59,6 @@ class __TwigTemplate_ef6ca62b51d6978f2b24b5e5ac06ba7600be3839b92b6248ab28009a5e2
 
     public function getSourceContext()
     {
-        return new Source("", "@Framework/Form/button_label.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/button_label.html.php");
+        return new Source("", "@Framework/Form/button_label.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/button_label.html.php");
     }
 }

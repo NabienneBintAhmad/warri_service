@@ -130,6 +130,6 @@ class __TwigTemplate_104af05ecabe8b4a7e75d2f590efc18e513afc908d42133842bfc508973
 
 </body>
 </html>
-", "@ApiPlatform/Graphiql/index.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
+", "@ApiPlatform/Graphiql/index.html.twig", "/var/www/html/my symphon/warri_service/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
     }
 }

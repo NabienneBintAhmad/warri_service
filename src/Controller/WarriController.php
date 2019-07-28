@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-
 use App\Entity\User;
-use App\Entity\UserSystem;
+use App\Entity\UserSystemes;
 use App\Entity\EntreprisePrestataire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +19,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use phpDocumentor\Reflection\Types\This;
+use App\Entity\UserPrestataire;
+use App\Entity\ComptePrestataire;
 
 /**
      * @Route("/api")
@@ -28,7 +29,7 @@ class WarriController extends AbstractController
 {
     
     
-    
+
     
     /**
      * @Route("/warri", name="warri")
@@ -93,7 +94,7 @@ class WarriController extends AbstractController
      * @Route("/system/show/", name="all_user_system")
      */
     public function allus(SerializerInterface $ser){
-        $users = $this->getDoctrine()->getRepository(UserSystem::class)->findAll();
+        $users = $this->getDoctrine()->getRepository(UserSystemes::class)->findAll();
         $users_serialized =  $this->get('serializer')->serialize($users, 'json');
         $response = new Response($users_serialized);
         return($response);
@@ -103,7 +104,7 @@ class WarriController extends AbstractController
      * @Route("/system/show/{id}", name="one_user_system")
      */
     public function oneus(SerializerInterface $ser,$id){
-        $users = $this->getDoctrine()->getRepository(UserSystem::class)->find($id);
+        $users = $this->getDoctrine()->getRepository(UserSystemes::class)->find($id);
         $users_serialized =  $this->get('serializer')->serialize($users, 'json');
         $response = new Response($users_serialized);
         return($response);
@@ -118,14 +119,15 @@ class WarriController extends AbstractController
         $data = json_decode($request->getContent(),true);
         // $dump = $request->getContent();
         
-        $dump = new UserSystem;
+        $dump = new UserSystemes;
+    
         $dump->setNom($data['nom']);
         $dump->setPrenom($data['prenom']);
-        $dump->setEamil($data['eamil']);
-        $dump->setTelephone($data['telephone']);
-        $dump->setAdress($data['adress']);
-        $dump->setPassword($data['pass']);
-        $dump->setStatut($data['status']);
+        $dump->setEmail($data['email']);
+        $dump->setTelephone($data['tel']);
+        $dump->setAdresse($data['adress']);
+        $dump->setCni($data['cni']);
+        $dump->setStatus($data['status']);
 
         // $ser = $this->get('serializer');
         // $data = $ser->deserialize($dump,UserSystem::class,'json');
@@ -144,14 +146,7 @@ class WarriController extends AbstractController
      */
 
     public function delete_user_system($id){
-        $userrep = $this->getDoctrine->getRepository(UserSystem::class);
-        $user = $userrep->find($id);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($user);
-        $em->flush();
- 
-        return new JsonResponse("Deleted");
+      
     }
 
 // ============================================== PRESTATAIRE
@@ -188,50 +183,67 @@ class WarriController extends AbstractController
     }
 
     /**
-     * @Route("/prest/user/add")
+     * @Route("/prest/show", name="show_prestataire") 
      */
-    public function add_user_prestataire(){
-     
-        
+    public function show_prestataire(Request $request){
+        $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
+        $prestataires = $prestatairerep->findAll();
+
+        $prest_serialized = $this->get('serializer')->serialize($prestataires,'json');
+
+        // var_dump($prestataires);
+        return new Response($prest_serialized);
+    }
+
+    /**
+     * @Route("/prest/user/add",name="add_user_prestataire",methods={"POST"})
+     */
+    public function add_user_prestataire(Request $request){
+       
         return new jsonResponse("Succes");
     }
+
+
 
     /**
      * @Route("/prest/user/show")
      */
     public function show_user_prestataire(){
-     
+        $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
+        $user = $userrep->findAll();
 
-        return new jsonResponse("Succes");
+        $user_serialized = $this->get('serializer')->serialize($user,'json');
+
+        // var_dump($prestataires);
+        return new Response($user_serialized);
     }
 
-    /**
-     * @Route("/prest/user/show/{id}")
-     */
-    public function show_one_user_prestataire(){
-     
+    
 
-        return new jsonResponse("Succes");
+    /**
+     * @Route("/prest/user/show/{id}",name="one_user_show")
+     */
+    public function show_one_user_prestataire($id){
+        $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
+        $user = $userrep->find($id);
+
+        $user_serialized = $this->get('serializer')->serialize($user,'json');
+
+        // var_dump($prestataires);
+        return new Response($user_serialized);
     }
 
 // ============================================== Compte
-
+    
     /**
-     * @Route("/compte/show/")
+     * @Route("/compte/show",name="show_compte")
      */
     public function show_compte(){
-     
+        $compterep = $this->getDoctrine()->getRepository(ComptePrestataire::class);
+        $compte = $compterep->findAll();
 
-        return new jsonResponse("Succes");
-    }
-
-    /**
-     * @Route("/compte/show/{id}")
-     */
-    public function show_one_compte(){
-     
-
-        return new jsonResponse("Succes");
+        $compte_serialized = $this->get('serializer')->serialize($compte,'json');
+        return new Response($compte_serialized);
     }
 
 }

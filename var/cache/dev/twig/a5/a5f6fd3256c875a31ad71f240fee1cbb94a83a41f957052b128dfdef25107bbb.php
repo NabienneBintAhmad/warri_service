@@ -79,6 +79,6 @@ class __TwigTemplate_8936223d1cefb6813c62e90cb0b3cabbfdd121c97ff8457be4ab67be6fe
         return new Source("<?xml version=\"1.0\" encoding=\"{{ _charset }}\" ?>
 
 <error code=\"{{ status_code }}\" message=\"{{ status_text }}\" />
-", "@Twig/Exception/error.xml.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bundle/Resources/views/Exception/error.xml.twig");
+", "@Twig/Exception/error.xml.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bundle/Resources/views/Exception/error.xml.twig");
     }
 }

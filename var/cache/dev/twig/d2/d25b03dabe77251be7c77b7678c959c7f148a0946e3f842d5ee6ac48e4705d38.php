@@ -71,6 +71,6 @@ class __TwigTemplate_5e54807e1d42640d863bbf2eb2e05c57d2376cdee84e2357296d9bb2582
         <?php echo \$view['form']->widget(\$form); ?>
     </td>
 </tr>
-", "@Framework/FormTable/hidden_row.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/FormTable/hidden_row.html.php");
+", "@Framework/FormTable/hidden_row.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/FormTable/hidden_row.html.php");
     }
 }

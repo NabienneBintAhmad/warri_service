@@ -69,6 +69,6 @@ class __TwigTemplate_b5440bf80740f849230427277e793520a95330efca2b31b2e65ef1f1372
     public function getSourceContext()
     {
         return new Source("{{ include('@Twig/Exception/error.xml.twig') }}
-", "@Twig/Exception/error.rdf.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bundle/Resources/views/Exception/error.rdf.twig");
+", "@Twig/Exception/error.rdf.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bundle/Resources/views/Exception/error.rdf.twig");
     }
 }

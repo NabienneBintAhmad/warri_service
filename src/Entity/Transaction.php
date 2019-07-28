@@ -21,75 +21,74 @@ class Transaction
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $transactionType;
+    private $compte;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $dateTransaction;
+    private $Type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="transactions")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="date")
      */
-    private $matEntreprise;
+    private $Date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ComptePrestataire", inversedBy="transaction")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $comptePrestataire;
+    private $Montant;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTransactionType(): ?string
+    public function getCompte(): ?string
     {
-        return $this->transactionType;
+        return $this->compte;
     }
 
-    public function setTransactionType(string $transactionType): self
+    public function setCompte(string $compte): self
     {
-        $this->transactionType = $transactionType;
+        $this->compte = $compte;
 
         return $this;
     }
 
-    public function getDateTransaction(): ?\DateTimeInterface
+    public function getType(): ?string
     {
-        return $this->dateTransaction;
+        return $this->Type;
     }
 
-    public function setDateTransaction(\DateTimeInterface $dateTransaction): self
+    public function setType(string $Type): self
     {
-        $this->dateTransaction = $dateTransaction;
+        $this->Type = $Type;
 
         return $this;
     }
 
-    public function getMatEntreprise(): ?EntreprisePrestataire
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->matEntreprise;
+        return $this->Date;
     }
 
-    public function setMatEntreprise(?EntreprisePrestataire $matEntreprise): self
+    public function setDate(\DateTimeInterface $Date): self
     {
-        $this->matEntreprise = $matEntreprise;
+        $this->Date = $Date;
 
         return $this;
     }
 
-    public function getComptePrestataire(): ?ComptePrestataire
+    public function getMontant(): ?int
     {
-        return $this->comptePrestataire;
+        return $this->Montant;
     }
 
-    public function setComptePrestataire(?ComptePrestataire $comptePrestataire): self
+    public function setMontant(int $Montant): self
     {
-        $this->comptePrestataire = $comptePrestataire;
+        $this->Montant = $Montant;
 
         return $this;
     }
+
 }

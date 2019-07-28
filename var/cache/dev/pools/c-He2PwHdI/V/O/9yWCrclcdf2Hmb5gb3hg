@@ -10,12 +10,12 @@
                 'properties' => [
                     [
                         'id',
-                        'nom',
-                        'prenom',
-                        'tel',
-                        'email',
-                        'adress',
-                        'matEntreprise',
+                        'Matricule',
+                        'Nom',
+                        'Prenom',
+                        'Telephone',
+                        'Email',
+                        'Adresse',
                     ],
                 ],
             ],

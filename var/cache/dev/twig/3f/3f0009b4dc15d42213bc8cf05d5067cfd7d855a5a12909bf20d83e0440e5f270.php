@@ -79,6 +79,6 @@ class __TwigTemplate_e3ef02facad3d39670303b19abb93a8b603704ceb24244d6d27a9df2edf
 {{ status_code }} {{ status_text }}
 
 */
-", "@Twig/Exception/error.js.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bundle/Resources/views/Exception/error.js.twig");
+", "@Twig/Exception/error.js.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bundle/Resources/views/Exception/error.js.twig");
     }
 }

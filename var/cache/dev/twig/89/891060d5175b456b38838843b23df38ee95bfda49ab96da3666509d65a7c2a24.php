@@ -266,6 +266,6 @@ class __TwigTemplate_b93c8747cc95ae3b5ab0c37527ba19db7cd0c0b9e6e81973bb17a22a101
         {{- form_rest(form) -}}
     </table>
 {%- endblock form_widget_compound -%}
-", "form_table_layout.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
+", "form_table_layout.html.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
     }
 }

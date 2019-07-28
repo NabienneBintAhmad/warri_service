@@ -19,109 +19,109 @@ class UserPrestataire
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $nom;
+    private $Matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $prenom;
+    private $Nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Prenom;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $tel;
+    private $Telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $Email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adress;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EntreprisePrestataire", inversedBy="userPrestataires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $mat_entreprise;
+    private $Adresse;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getMatricule(): ?EntreprisePrestataire
     {
-        return $this->nom;
+        return $this->Matricule;
     }
 
-    public function setNom(string $nom): self
+    public function setMatricule(?EntreprisePrestataire $Matricule): self
     {
-        $this->nom = $nom;
+        $this->Matricule = $Matricule;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->Nom;
+    }
+
+    public function setNom(string $Nom): self
+    {
+        $this->Nom = $Nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->prenom;
+        return $this->Prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $Prenom): self
     {
-        $this->prenom = $prenom;
+        $this->Prenom = $Prenom;
 
         return $this;
     }
 
-    public function getTel(): ?int
+    public function getTelephone(): ?int
     {
-        return $this->tel;
+        return $this->Telephone;
     }
 
-    public function setTel(int $tel): self
+    public function setTelephone(int $Telephone): self
     {
-        $this->tel = $tel;
+        $this->Telephone = $Telephone;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->Email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $Email): self
     {
-        $this->email = $email;
+        $this->Email = $Email;
 
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->adress;
+        return $this->Adresse;
     }
 
-    public function setAdress(string $adress): self
+    public function setAdresse(string $Adresse): self
     {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getMatEntreprise(): ?EntreprisePrestataire
-    {
-        return $this->mat_entreprise;
-    }
-
-    public function setMatEntreprise(?EntreprisePrestataire $mat_entreprise): self
-    {
-        $this->mat_entreprise = $mat_entreprise;
+        $this->Adresse = $Adresse;
 
         return $this;
     }

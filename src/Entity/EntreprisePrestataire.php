@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,167 +21,89 @@ class EntreprisePrestataire
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomComplet;
+    private $Denomination;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $matricule;
+    private $Matricule;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $Email;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $contact;
+    private $Contacte;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adress;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserPrestataire", mappedBy="mat_entreprise")
-     */
-    private $userPrestataires;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="matEntreprise")
-     */
-    private $transactions;
-
-    public function __construct()
-    {
-        $this->userPrestataires = new ArrayCollection();
-        $this->transactions = new ArrayCollection();
-    }
+    private $Adress;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomComplet(): ?string
+    public function getDenomination(): ?string
     {
-        return $this->nomComplet;
+        return $this->Denomination;
     }
 
-    public function setNomComplet(string $nomComplet): self
+    public function setDenomination(string $Denomination): self
     {
-        $this->nomComplet = $nomComplet;
+        $this->Denomination = $Denomination;
 
         return $this;
     }
 
     public function getMatricule(): ?string
     {
-        return $this->matricule;
+        return $this->Matricule;
     }
 
-    public function setMatricule(string $matricule): self
+    public function setMatricule(string $Matricule): self
     {
-        $this->matricule = $matricule;
+        $this->Matricule = $Matricule;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->Email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $Email): self
     {
-        $this->email = $email;
+        $this->Email = $Email;
 
         return $this;
     }
 
-    public function getContact(): ?int
+    public function getContacte(): ?int
     {
-        return $this->contact;
+        return $this->Contacte;
     }
 
-    public function setContact(int $contact): self
+    public function setContacte(int $Contacte): self
     {
-        $this->contact = $contact;
+        $this->Contacte = $Contacte;
 
         return $this;
     }
 
     public function getAdress(): ?string
     {
-        return $this->adress;
+        return $this->Adress;
     }
 
-    public function setAdress(string $adress): self
+    public function setAdress(string $Adress): self
     {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserPrestataire[]
-     */
-    public function getUserPrestataires(): Collection
-    {
-        return $this->userPrestataires;
-    }
-
-    public function addUserPrestataire(UserPrestataire $userPrestataire): self
-    {
-        if (!$this->userPrestataires->contains($userPrestataire)) {
-            $this->userPrestataires[] = $userPrestataire;
-            $userPrestataire->setMatEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserPrestataire(UserPrestataire $userPrestataire): self
-    {
-        if ($this->userPrestataires->contains($userPrestataire)) {
-            $this->userPrestataires->removeElement($userPrestataire);
-            // set the owning side to null (unless already changed)
-            if ($userPrestataire->getMatEntreprise() === $this) {
-                $userPrestataire->setMatEntreprise(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Transaction[]
-     */
-    public function getTransactions(): Collection
-    {
-        return $this->transactions;
-    }
-
-    public function addTransaction(Transaction $transaction): self
-    {
-        if (!$this->transactions->contains($transaction)) {
-            $this->transactions[] = $transaction;
-            $transaction->setMatEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTransaction(Transaction $transaction): self
-    {
-        if ($this->transactions->contains($transaction)) {
-            $this->transactions->removeElement($transaction);
-            // set the owning side to null (unless already changed)
-            if ($transaction->getMatEntreprise() === $this) {
-                $transaction->setMatEntreprise(null);
-            }
-        }
+        $this->Adress = $Adress;
 
         return $this;
     }

@@ -73,6 +73,6 @@ class __TwigTemplate_466891699feb2d9aac1d04de0edc1b224fc24338d7a1cf42b531c2c079c
         <?php echo \$view['form']->widget(\$form); ?>
     </td>
 </tr>
-", "@Framework/FormTable/button_row.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/FormTable/button_row.html.php");
+", "@Framework/FormTable/button_row.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/FormTable/button_row.html.php");
     }
 }

@@ -67,6 +67,6 @@ class __TwigTemplate_0bc5519bd36d46384e220d294a52316fcf1e3af2fff3d7e22e7d7e690ef
         return new Source("<div>
     <?php echo \$view['form']->widget(\$form) ?>
 </div>
-", "@Framework/Form/button_row.html.php", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/framework-bundle/Resources/views/Form/button_row.html.php");
+", "@Framework/Form/button_row.html.php", "/var/www/html/my symphon/warri_service/vendor/symfony/framework-bundle/Resources/views/Form/button_row.html.php");
     }
 }

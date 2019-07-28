@@ -11,8 +11,8 @@
                     [
                         'App\\Entity\\Transaction',
                         'App\\Entity\\UserPrestataire',
+                        'App\\Entity\\UserSystemes',
                         'App\\Entity\\EntreprisePrestataire',
-                        'App\\Entity\\UserSystem',
                         'App\\Entity\\ComptePrestataire',
                     ],
                 ],

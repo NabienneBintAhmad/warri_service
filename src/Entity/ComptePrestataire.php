@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,79 +22,38 @@ class ComptePrestataire
      * @ORM\OneToOne(targetEntity="App\Entity\EntreprisePrestataire", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $matEntreprise;
+    private $matricule;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $somme;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="comptePrestataire")
-     */
-    private $transaction;
-
-    public function __construct()
-    {
-        $this->transaction = new ArrayCollection();
-    }
+    private $solde;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMatEntreprise(): ?EntreprisePrestataire
+    public function getMatricule(): ?EntreprisePrestataire
     {
-        return $this->matEntreprise;
+        return $this->matricule;
     }
 
-    public function setMatEntreprise(EntreprisePrestataire $matEntreprise): self
+    public function setMatricule(EntreprisePrestataire $matricule): self
     {
-        $this->matEntreprise = $matEntreprise;
+        $this->matricule = $matricule;
 
         return $this;
     }
 
-    public function getSomme(): ?int
+    public function getSolde(): ?int
     {
-        return $this->somme;
+        return $this->solde;
     }
 
-    public function setSomme(int $somme): self
+    public function setSolde(int $solde): self
     {
-        $this->somme = $somme;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Transaction[]
-     */
-    public function getTransaction(): Collection
-    {
-        return $this->transaction;
-    }
-
-    public function addTransaction(Transaction $transaction): self
-    {
-        if (!$this->transaction->contains($transaction)) {
-            $this->transaction[] = $transaction;
-            $transaction->setComptePrestataire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTransaction(Transaction $transaction): self
-    {
-        if ($this->transaction->contains($transaction)) {
-            $this->transaction->removeElement($transaction);
-            // set the owning side to null (unless already changed)
-            if ($transaction->getComptePrestataire() === $this) {
-                $transaction->setComptePrestataire(null);
-            }
-        }
+        $this->solde = $solde;
 
         return $this;
     }

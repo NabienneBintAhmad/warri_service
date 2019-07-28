@@ -874,6 +874,6 @@ class __TwigTemplate_68af3e36b7ba0e76425b81b40ecb1236e2206d5a7028a380cb00cf81bc0
         </tbody>
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/translation.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/web-profiler-bundle/Resources/views/Collector/translation.html.twig");
+", "@WebProfiler/Collector/translation.html.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/web-profiler-bundle/Resources/views/Collector/translation.html.twig");
     }
 }

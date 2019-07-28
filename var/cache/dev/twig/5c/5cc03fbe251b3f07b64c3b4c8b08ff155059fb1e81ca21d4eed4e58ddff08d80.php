@@ -171,6 +171,6 @@ class __TwigTemplate_f4903fc874bb7994b932999f0fa7baa11512118b4c0fb485f2a72d314dc
         {%- endfor -%}
     </pre>
 {% endif %}
-", "@Doctrine/Collector/explain.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
+", "@Doctrine/Collector/explain.html.twig", "/var/www/html/my symphon/warri_service/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
     }
 }

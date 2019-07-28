@@ -125,6 +125,6 @@ class __TwigTemplate_09e053d046573da071254e6e81b58887ece9525ce026263347ab7e1c347
         </div>
     </body>
 </html>
-", "@Twig/Exception/error.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/twig-bundle/Resources/views/Exception/error.html.twig");
+", "@Twig/Exception/error.html.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/twig-bundle/Resources/views/Exception/error.html.twig");
     }
 }

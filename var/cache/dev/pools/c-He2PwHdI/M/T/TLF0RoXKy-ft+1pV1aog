@@ -10,9 +10,8 @@
                 'properties' => [
                     [
                         'id',
-                        'matEntreprise',
-                        'somme',
-                        'transaction',
+                        'matricule',
+                        'solde',
                     ],
                 ],
             ],

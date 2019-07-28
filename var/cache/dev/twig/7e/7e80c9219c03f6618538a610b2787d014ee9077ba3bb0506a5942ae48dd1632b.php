@@ -417,6 +417,6 @@ class __TwigTemplate_a5bfaecaac5e097c732c7d7149da01072f65ed1b6e3936407d50b4abb7a
     });
 })();
 </script>
-", "@WebProfiler/Profiler/settings.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
+", "@WebProfiler/Profiler/settings.html.twig", "/var/www/html/my symphon/warri_service/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/settings.html.twig");
     }
 }
