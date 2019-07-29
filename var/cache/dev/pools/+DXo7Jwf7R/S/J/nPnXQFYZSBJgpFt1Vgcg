@@ -8,7 +8,13 @@
         [
             'ApiPlatform\\Core\\Metadata\\Resource\\ResourceNameCollection' => [
                 'classes' => [
-                    [],
+                    [
+                        'App\\Entity\\Transaction',
+                        'App\\Entity\\UserPrestataire',
+                        'App\\Entity\\EntreprisePrestataire',
+                        'App\\Entity\\ComptePrestataire',
+                        'App\\Entity\\UserSystemes',
+                    ],
                 ],
             ],
         ],
