@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-use App\Entity\User;
+use App\Entity\UserSystemes;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +19,7 @@ use phpDocumentor\Reflection\Types\This;
 use App\Entity\UserPrestataire;
 use App\Entity\ComptePrestataire;
 use App\Entity\Transaction;
+use App\Entity\EntreprisePrestataire;
 use Symfony\Component\Validator\Constraints\Date;
 use \DateTime;
 
@@ -261,7 +262,7 @@ class WarriController extends AbstractController
         $data = json_decode($data,true);
         // var_dump($data);
         // $date = ($data['date']);
-        // var_dump($date);
+        // var_dump($date);http://127.0.0.1:8000/api/prest/show
 
         $trans = new Transaction;
         $trans->setCompte($data['compte']);
@@ -269,7 +270,7 @@ class WarriController extends AbstractController
         $trans->setMontant($data['montant']);
         // $trans->setDate( new \DateTime ($data['date']));
         $trans->setDate( new \DateTime('now'));
-        var_dump($trans);
+        // var_dump($trans);
 
         // $em = $this->getDoctrine()->getmanager();
         // $em->persist($trans);

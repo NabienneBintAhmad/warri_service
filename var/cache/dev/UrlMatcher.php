@@ -13,10 +13,7 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
-        '/api/register' => [
-            [['_route' => 'apiregister', '_controller' => 'App\\Controller\\LoginController::register'], null, ['POST' => 0, 'GET' => 1], null, false, false, null],
-            [['_route' => 'register', '_controller' => 'App\\Controller\\WarriController::register'], null, ['POST' => 0, 'GET' => 1], null, false, false, null],
-        ],
+        '/api/register' => [[['_route' => 'apiregister', '_controller' => 'App\\Controller\\LoginController::register'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/api/warri' => [[['_route' => 'warri', '_controller' => 'App\\Controller\\WarriController::index'], null, null, null, false, false, null]],
         '/api/system/show' => [[['_route' => 'all_user_system', '_controller' => 'App\\Controller\\WarriController::allus'], null, null, null, true, false, null]],
         '/api/system/add' => [[['_route' => 'add_user_sys', '_controller' => 'App\\Controller\\WarriController::system_add_user'], null, ['POST' => 0], null, false, false, null]],
@@ -27,6 +24,7 @@ return [
         '/api/compte/show' => [[['_route' => 'show_compte', '_controller' => 'App\\Controller\\WarriController::show_compte'], null, null, null, false, false, null]],
         '/api/compte/add' => [[['_route' => 'add_compte', '_controller' => 'App\\Controller\\WarriController::add_compte'], null, null, null, false, false, null]],
         '/api/transaction/add' => [[['_route' => 'add_transaction', '_controller' => 'App\\Controller\\WarriController::add_transaction'], null, ['POST' => 0], null, false, false, null]],
+        '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

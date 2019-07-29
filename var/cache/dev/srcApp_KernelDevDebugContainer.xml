@@ -483,6 +483,30 @@
         <argument type="service" id=".service_locator.CDOTD6..App\Controller\WarriController"/>
       </call>
     </service>
+    <service id="App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserPrestataireRepository" class="App\Repository\UserPrestataireRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserSystemRepository" class="App\Repository\UserSystemRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\UserSystemesRepository" class="App\Repository\UserSystemesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -1702,14 +1726,6 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -3493,7 +3509,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.zKKw90V"/>
+      <argument type="service" id=".service_locator.0uCLJO_"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4886,6 +4902,18 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserPrestataireRepository" class="App\Repository\UserPrestataireRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserPrestataireRepository" class="App\Repository\UserPrestataireRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserSystemRepository" class="App\Repository\UserSystemRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserSystemRepository" class="App\Repository\UserSystemRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserSystemesRepository" class="App\Repository\UserSystemesRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\UserSystemesRepository" class="App\Repository\UserSystemesRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="maker.auto_command.make_auth" class="Symfony\Bundle\MakerBundle\Command\MakerCommand" public="false">
@@ -5165,9 +5193,15 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.zKKw90V" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.0uCLJO_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ComptePrestataireRepository" type="service" id="App\Repository\ComptePrestataireRepository"/>
+        <argument key="App\Repository\EntreprisePrestataireRepository" type="service" id="App\Repository\EntreprisePrestataireRepository"/>
+        <argument key="App\Repository\TransactionRepository" type="service" id="App\Repository\TransactionRepository"/>
+        <argument key="App\Repository\UserPrestataireRepository" type="service" id="App\Repository\UserPrestataireRepository"/>
+        <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
+        <argument key="App\Repository\UserSystemRepository" type="service" id="App\Repository\UserSystemRepository"/>
         <argument key="App\Repository\UserSystemesRepository" type="service" id="App\Repository\UserSystemesRepository"/>
       </argument>
     </service>
