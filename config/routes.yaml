@@ -1,5 +1,10 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+<<<<<<< HEAD
 api_login_check:
     path: /api/login_check
+=======
+# api_login_check:
+#     path: /api/login_check
+>>>>>>> 0331145bcad2a45a7e6b22ad2c216a8e0db95991
