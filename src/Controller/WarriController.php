@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+
 use App\Entity\UserSystemes;
-use App\Entity\EntreprisePrestataire;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;;
-use Symfony\Component\Serializer\SerializerInterface;
-Use App\Repository\UserSystemRepository;
-use Doctrine\ORM\EntityManager;
-// ========================================== ASTA
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -22,6 +20,7 @@ use phpDocumentor\Reflection\Types\This;
 use App\Entity\UserPrestataire;
 use App\Entity\ComptePrestataire;
 use App\Entity\Transaction;
+use App\Entity\EntreprisePrestataire;
 use Symfony\Component\Validator\Constraints\Date;
 use \DateTime;
 
@@ -49,47 +48,7 @@ class WarriController extends AbstractController
         ]);
     }
    
-        /**
-         * @Route("/register", name="register", methods={"POST", "GET"})
-         */
-        public function register(Request $request,UserPasswordEncoderInterface $passwordEncoder,EntityManagerInterface $entityManager,SerializerInterface $serializer,ValidatorInterface $validator)
-        {
-            $values = json_decode($request->getContent());
-            if(isset($values->email,$values->password)) 
-            {
-                $user = new User();
 
-                //$form=$this->createForm(UserTypee::class, $user);
-                //$form->handleRequest($request);
-                
-                $user->setEmail($values->email);
-                $user->setPassword($passwordEncoder->encodePassword($user,$values->password));
-                $user->setRoles($user->getRoles());
-                $errors = $validator->validate($user);
-                if(count($errors))
-                 {
-                    $errors = $serializer->serialize($errors, 'json');
-                    return new Response($errors, 500, [
-                        'Content-Type' => 'application/json'
-                    ]);
-                }
-                $entityManager=$this->getDoctrine()->getManager(); 
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                $data = [
-                    'status' => 201,
-                    'message' => 'bien insere'
-                ];
-                return new JsonResponse($data,201);
-    
-                $data = [
-                    'status' => 500,
-                    'message' => 'renseignez les champs'
-                ];
-                return new JsonResponse($data,500);
-            }
-        }
 
 // ============================================== SYSTEM
 
@@ -171,6 +130,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/add", name="add_prestataire",methods={"POST"}) 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add_prestataire(Request $request){
         $mat = date('y');
@@ -198,6 +158,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/show", name="show_prestataire") 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show_prestataire(Request $request){
         $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
@@ -213,7 +174,8 @@ class WarriController extends AbstractController
     } // done !
 
      /**
-     * @Route("/prest/show/{id}", name="show_one_prestataire") 
+     * @Route("/prest/show/{id}", name="show_one_prestataire")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show_one_prestataire(Request $request,$id){
         $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
@@ -227,6 +189,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/add",name="add_user_prestataire",methods={"POST"})
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function add_user_prestataire(Request $request){
         $data = $request->getContent();
@@ -259,6 +222,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/show")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_user_prestataire(){
         $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
@@ -274,6 +238,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/show/{id}",name="one_user_show")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_one_user_prestataire($id){
         $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
@@ -289,6 +254,7 @@ class WarriController extends AbstractController
     
     /**
      * @Route("/compte/show",name="show_compte")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_compte(){
         $compterep = $this->getDoctrine()->getRepository(ComptePrestataire::class);
@@ -300,6 +266,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/compte/add",name="add_compte")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add_compte(Request $request){
         $data = $request->getContent();
@@ -329,13 +296,14 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/transaction/add",name="add_transaction",methods={"POST"})
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function add_transaction(Request $request){
         $data = $request->getContent();
         $data = json_decode($data,true);
         // var_dump($data);
         // $date = ($data['date']);
-        // var_dump($date);
+        // var_dump($date);http://127.0.0.1:8000/api/prest/show
 
         $trans = new Transaction;
         $trans->setCompte($data['compte']);
@@ -343,7 +311,7 @@ class WarriController extends AbstractController
         $trans->setMontant($data['montant']);
         // $trans->setDate( new \DateTime ($data['date']));
         $trans->setDate( new \DateTime('now'));
-        var_dump($trans);
+        // var_dump($trans);
 
         $em = $this->getDoctrine()->getmanager();
         $em->persist($trans);
@@ -355,6 +323,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/transaction/show/{cmpt}",name="show_transaction")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
 
      public function show_trans(Request $req,$cmpt){
