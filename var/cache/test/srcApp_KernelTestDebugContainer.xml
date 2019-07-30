@@ -372,6 +372,7 @@
     <parameter key="lexik_jwt_authentication.user_id_claim">username</parameter>
     <parameter key="lexik_jwt_authentication.encoder.signature_algorithm">RS256</parameter>
     <parameter key="lexik_jwt_authentication.encoder.crypto_engine">openssl</parameter>
+    <parameter key="fos_rest.format_listener.rules">null</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -1460,17 +1461,22 @@
         <argument key="form.type_extension.submit.validator" type="service" id="form.type_extension.submit.validator" on-invalid="ignore_uninitialized"/>
         <argument key="form.type_guesser.doctrine" type="service" id="form.type_guesser.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="form.type_guesser.validator" type="service" id="form.type_guesser.validator" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.access_denied_listener" type="service" id="fos_rest.access_denied_listener" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.body_listener" type="service" id="fos_rest.body_listener" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.decoder.json" type="service" id="fos_rest.decoder.json" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.decoder.jsontoform" type="service" id="fos_rest.decoder.jsontoform" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.decoder.xml" type="service" id="fos_rest.decoder.xml" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.decoder_provider" type="service" id="fos_rest.decoder_provider" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.format_listener" type="service" id="fos_rest.format_listener" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.format_negotiator" type="service" id="fos_rest.format_negotiator" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.inflector" type="service" id="fos_rest.inflector.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.inflector.doctrine" type="service" id="fos_rest.inflector.doctrine" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.normalizer.camel_keys" type="service" id="fos_rest.normalizer.camel_keys" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.normalizer.camel_keys_with_leading_underscore" type="service" id="fos_rest.normalizer.camel_keys_with_leading_underscore" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.param_fetcher_listener" type="service" id="fos_rest.param_fetcher_listener" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.request.param_fetcher" type="service" id="fos_rest.request.param_fetcher" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.request.param_fetcher.reader" type="service" id="fos_rest.request.param_fetcher.reader" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.request_matcher.2364365e6bb6bfd5cadeda231e59db9139fadac2b673beb794ba3c0068839a899dc3c386" type="service" id="fos_rest.request_matcher.2364365e6bb6bfd5cadeda231e59db9139fadac2b673beb794ba3c0068839a899dc3c386" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.router" type="service" id="router.default" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.routing.loader.controller" type="service" id="fos_rest.routing.loader.controller" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.routing.loader.directory" type="service" id="fos_rest.routing.loader.directory" on-invalid="ignore_uninitialized"/>
@@ -1485,6 +1491,7 @@
         <argument key="fos_rest.serializer.symfony" type="service" id="fos_rest.serializer.symfony" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.view_handler.default" type="service" id="fos_rest.view_handler.default" on-invalid="ignore_uninitialized"/>
         <argument key="fos_rest.view_handler.jsonp" type="service" id="fos_rest.view_handler.jsonp" on-invalid="ignore_uninitialized"/>
+        <argument key="fos_rest.view_response_listener" type="service" id="fos_rest.view_response_listener" on-invalid="ignore_uninitialized"/>
         <argument key="fragment.handler" type="service" id="fragment.handler" on-invalid="ignore_uninitialized"/>
         <argument key="fragment.renderer.inline" type="service" id="fragment.renderer.inline" on-invalid="ignore_uninitialized"/>
         <argument key="framework_extra_bundle.argument_name_convertor" type="service" id="framework_extra_bundle.argument_name_convertor" on-invalid="ignore_uninitialized"/>
@@ -2306,6 +2313,22 @@
         <argument>10</argument>
       </call>
       <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="fos_rest.format_listener"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>34</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument type="service" id="fos_rest.param_fetcher_listener"/>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>5</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.response</argument>
         <argument type="collection">
           <argument type="service" id="response_listener"/>
@@ -2584,6 +2607,22 @@
           <argument>onKernelFinishRequest</argument>
         </argument>
         <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.view</argument>
+        <argument type="collection">
+          <argument type="service" id="fos_rest.view_response_listener"/>
+          <argument>onKernelView</argument>
+        </argument>
+        <argument>30</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="fos_rest.access_denied_listener"/>
+          <argument>onKernelException</argument>
+        </argument>
+        <argument>5</argument>
       </call>
       <call method="addListener">
         <argument>kernel.controller</argument>
@@ -5249,7 +5288,6 @@
       <argument type="service" id="request_stack"/>
       <argument type="collection">
         <argument key="json">false</argument>
-        <argument key="xml">false</argument>
         <argument key="html">true</argument>
       </argument>
       <argument>400</argument>
@@ -5277,32 +5315,30 @@
       <argument type="service" id="file_locator"/>
       <argument type="service" id="controller_name_converter"/>
       <argument type="service" id="fos_rest.routing.loader.reader.controller"/>
-      <argument>null</argument>
+      <argument>json</argument>
     </service>
     <service id="fos_rest.routing.loader.processor" class="FOS\RestBundle\Routing\Loader\RestRouteProcessor" public="false"/>
     <service id="fos_rest.routing.loader.yaml_collection" class="FOS\RestBundle\Routing\Loader\RestYamlCollectionLoader" public="false">
       <tag name="routing.loader"/>
       <argument type="service" id="file_locator"/>
       <argument type="service" id="fos_rest.routing.loader.processor"/>
-      <argument>true</argument>
+      <argument>false</argument>
       <argument type="collection">
         <argument key="json">false</argument>
-        <argument key="xml">false</argument>
         <argument key="html">true</argument>
       </argument>
-      <argument>null</argument>
+      <argument>json</argument>
     </service>
     <service id="fos_rest.routing.loader.xml_collection" class="FOS\RestBundle\Routing\Loader\RestXmlCollectionLoader" public="false">
       <tag name="routing.loader"/>
       <argument type="service" id="file_locator"/>
       <argument type="service" id="fos_rest.routing.loader.processor"/>
-      <argument>true</argument>
+      <argument>false</argument>
       <argument type="collection">
         <argument key="json">false</argument>
-        <argument key="xml">false</argument>
         <argument key="html">true</argument>
       </argument>
-      <argument>null</argument>
+      <argument>json</argument>
     </service>
     <service id="fos_rest.routing.loader.reader.controller" class="FOS\RestBundle\Routing\Loader\Reader\RestControllerReader" public="false">
       <argument type="service" id="fos_rest.routing.loader.reader.action"/>
@@ -5312,10 +5348,9 @@
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="service" id="fos_rest.request.param_fetcher.reader"/>
       <argument type="service" id="fos_rest.inflector.doctrine"/>
-      <argument>true</argument>
+      <argument>false</argument>
       <argument type="collection">
         <argument key="json">false</argument>
-        <argument key="xml">false</argument>
         <argument key="html">true</argument>
       </argument>
       <argument>true</argument>
@@ -5340,6 +5375,11 @@
     </service>
     <service id="fos_rest.serializer.form_error_normalizer" class="FOS\RestBundle\Serializer\Normalizer\FormErrorNormalizer" public="false">
       <tag name="serializer.normalizer" priority="-10"/>
+    </service>
+    <service id="fos_rest.view_response_listener" class="FOS\RestBundle\EventListener\ViewResponseListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="fos_rest.view_handler.default"/>
+      <argument>true</argument>
     </service>
     <service id="fos_rest.normalizer.camel_keys" class="FOS\RestBundle\Normalizer\CamelKeysNormalizer"/>
     <service id="fos_rest.normalizer.camel_keys_with_leading_underscore" class="FOS\RestBundle\Normalizer\CamelKeysNormalizerWithLeadingUnderscore"/>
@@ -5368,6 +5408,42 @@
         <argument key="fos_rest.decoder.json" type="service" id="fos_rest.decoder.json"/>
         <argument key="fos_rest.decoder.xml" type="service" id="fos_rest.decoder.xml"/>
       </argument>
+    </service>
+    <service id="fos_rest.format_listener" class="FOS\RestBundle\EventListener\FormatListener">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="34"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="fos_rest.format_negotiator"/>
+    </service>
+    <service id="fos_rest.format_negotiator" class="FOS\RestBundle\Negotiation\FormatNegotiator">
+      <argument type="service" id="request_stack"/>
+      <call method="add">
+        <argument type="service" id="fos_rest.request_matcher.2364365e6bb6bfd5cadeda231e59db9139fadac2b673beb794ba3c0068839a899dc3c386"/>
+        <argument type="collection">
+          <argument key="prefer_extension">2.0</argument>
+          <argument key="fallback_format">json</argument>
+          <argument key="priorities" type="collection">
+            <argument>json</argument>
+          </argument>
+          <argument key="methods">null</argument>
+          <argument key="attributes" type="collection"/>
+          <argument key="stop">false</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="fos_rest.format_request_matcher" class="Symfony\Component\HttpFoundation\RequestMatcher" public="false" abstract="true"/>
+    <service id="fos_rest.param_fetcher_listener" class="FOS\RestBundle\EventListener\ParamFetcherListener">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" priority="5"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="fos_rest.request.param_fetcher"/>
+      <argument>false</argument>
+    </service>
+    <service id="fos_rest.access_denied_listener" class="FOS\RestBundle\EventListener\AccessDeniedListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="monolog.logger" channel="request"/>
+      <argument type="collection">
+        <argument key="json">true</argument>
+      </argument>
+      <argument>null</argument>
     </service>
     <service id="sensio_framework_extra.controller.listener" class="Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener" public="false">
       <tag name="kernel.event_subscriber"/>
@@ -5582,6 +5658,13 @@
         <argument key="App\Repository\UserSystemRepository" type="service" id="App\Repository\UserSystemRepository"/>
         <argument key="App\Repository\UserSystemesRepository" type="service" id="App\Repository\UserSystemesRepository"/>
       </argument>
+    </service>
+    <service id="fos_rest.request_matcher.2364365e6bb6bfd5cadeda231e59db9139fadac2b673beb794ba3c0068839a899dc3c386" class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+      <argument>^/api</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+      <argument type="collection"/>
     </service>
     <service id="logger" class="Symfony\Component\HttpKernel\Log\Logger" public="false"/>
     <service id=".service_locator.UwRI0uT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">

@@ -1,0 +1,30 @@
+ [{
+        "Date": {
+            "type": "date"
+        },
+        "Budget": {
+            "type": "number"
+        }
+    },
+    {
+        "Budget": "$1,899.73",
+        "Guests Number": 89,
+        "Event": "Meeting",
+        "Date": "2017-08-28",
+        "Country": "Poland",
+        "City": "Warsaw"
+    }
+]
+
+
+
+Argument... must implement interface DateTimeInterface, string given
+$trans->setDate( new \DateTime ('2019-05-03'));
+$trans->setDate( new \DateTime('now'));
+use Symfony\Component\Validator\Constraints\Date;
+
+renvoyer une reponse HTTP
+$response->setStatusCode(Response::HTTP_NO_CONTENT);
+
+pour directement avoir les donné en formant json a l'affichag
+$response->headers->set('content-type','application/json');

@@ -8,7 +8,7 @@
         [
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
                 'path' => [
-                    '/system/add',
+                    '/addUsersyst',
                 ],
                 'name' => [
                     'add_user_sys',

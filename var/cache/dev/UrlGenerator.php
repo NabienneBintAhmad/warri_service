@@ -20,7 +20,7 @@ return [
     'warri' => [[], ['_controller' => 'App\\Controller\\WarriController::index'], [], [['text', '/api/warri']], [], []],
     'all_user_system' => [[], ['_controller' => 'App\\Controller\\WarriController::allus'], [], [['text', '/api/system/show/']], [], []],
     'one_user_system' => [['id'], ['_controller' => 'App\\Controller\\WarriController::one_us'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/system/show']], [], []],
-    'add_user_sys' => [[], ['_controller' => 'App\\Controller\\WarriController::system_add_user'], [], [['text', '/api/system/add']], [], []],
+    'add_user_sys' => [[], ['_controller' => 'App\\Controller\\WarriController::system_add_user'], [], [['text', '/api/addUsersyst']], [], []],
     'add_prestataire' => [[], ['_controller' => 'App\\Controller\\WarriController::add_prestataire'], [], [['text', '/api/prest/add']], [], []],
     'show_prestataire' => [[], ['_controller' => 'App\\Controller\\WarriController::show_prestataire'], [], [['text', '/api/prest/show']], [], []],
     'show_one_prestataire' => [['id'], ['_controller' => 'App\\Controller\\WarriController::show_one_prestataire'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/prest/show']], [], []],
