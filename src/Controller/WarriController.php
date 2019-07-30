@@ -103,28 +103,49 @@ class WarriController extends AbstractController
         return new jsonResponse("succesfull !");
     } // done !
 
-    // /**
-    //  * @Route("/system/block/{cni}",name="block_user_system")
-    //  */
-    // public function block_user_system(Request $req){
-    //     $data = $req->getContent();
-    //     $data = json_decode($data,true);
-    //     // var_dump($data);
-    //     $cni = $data['cni']; 
-    //     // echo($cni);
+    /**
+     * @Route("/system/block/{id}",name="block_user_system")
+     */
 
-    //     $repos = $this->getDoctrine()->getRepository(UserSystemes::class)->CreateQuerybuilder('a')
-    //         // ->Update('user_systemes','a')
-    //         ->Update()
-    //         ->Set('status','?0')
-    //         ->setParameter(0,'0')
-    //         ->where('cni = ?1')
-    //         ->setParameter(1,$cni)
-    //         ->getQuery();
+    public function block_user_sys(Request $req){
+        $data = $req->getContent();
+        $data = json_decode($data,true);
+        $id = $data['id']; 
+        $repos = $this->getDoctrine()->getRepository(UserSystemes::class)->find($id);
+        $repos->setStatus('0');
+        var_dump($repos);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
 
-    //     $result=$repos->getResult(); 
-    //     return new response ("teste"); 
-    // }
+        return new jsonResponse('well');
+    }
+
+    /**
+     * @Route("/system/edit/{id}",name="edit_user_system")
+     */
+
+    public function edit_user_sys(Request $req){
+        $data = $req->getContent();
+        $data = json_decode($data,true);
+        $id = $data['id'];
+        $repos = $this->getDoctrine()->getRepository(UserSystemes::class)->find($id);
+        
+        $repos->setNom($data['nom']);
+        $repos->setPrenom($data['prenom']);
+        $repos->setEmail($data['email']);
+        $repos->setTelephone($data['tel']);
+        $repos->setAdresse($data['adress']);
+        $repos->setCni($data['cni']);
+        $repos->setStatus($data['status']);
+
+        var_dump($repos);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new jsonResponse('well');
+    }
 
 // ============================================== PRESTATAIRE
 

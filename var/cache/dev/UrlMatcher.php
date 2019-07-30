@@ -49,59 +49,60 @@ return [
                         .'|system/(?'
                             .'|show/([^/]++)(*:203)'
                             .'|block/([^/]++)(*:225)'
+                            .'|edit/([^/]++)(*:246)'
                         .')'
                         .'|prest/(?'
-                            .'|show/([^/]++)(*:256)'
-                            .'|user/show/([^/]++)(*:282)'
+                            .'|show/([^/]++)(*:277)'
+                            .'|user/show/([^/]++)(*:303)'
                         .')'
-                        .'|transaction/show/([^/]++)(*:316)'
+                        .'|transaction/show/([^/]++)(*:337)'
                     .')'
-                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:353)'
+                    .'|(?:/(index)(?:\\.([^/]++))?)?(*:374)'
                     .'|/(?'
-                        .'|docs(?:\\.([^/]++))?(*:384)'
+                        .'|docs(?:\\.([^/]++))?(*:405)'
                         .'|co(?'
-                            .'|ntexts/(.+)(?:\\.([^/]++))?(*:423)'
+                            .'|ntexts/(.+)(?:\\.([^/]++))?(*:444)'
                             .'|mpte_prestataires(?'
                                 .'|(?:\\.([^/]++))?(?'
-                                    .'|(*:469)'
+                                    .'|(*:490)'
                                 .')'
                                 .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
-                                    .'|(*:507)'
+                                    .'|(*:528)'
                                 .')'
                             .')'
                         .')'
                         .'|transactions(?'
                             .'|(?:\\.([^/]++))?(?'
-                                .'|(*:551)'
+                                .'|(*:572)'
                             .')'
                             .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
-                                .'|(*:589)'
+                                .'|(*:610)'
                             .')'
                         .')'
                         .'|user_(?'
                             .'|prestataires(?'
                                 .'|(?:\\.([^/]++))?(?'
-                                    .'|(*:640)'
+                                    .'|(*:661)'
                                 .')'
                                 .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
-                                    .'|(*:678)'
+                                    .'|(*:699)'
                                 .')'
                             .')'
                             .'|systemes(?'
                                 .'|(?:\\.([^/]++))?(?'
-                                    .'|(*:717)'
+                                    .'|(*:738)'
                                 .')'
                                 .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
-                                    .'|(*:755)'
+                                    .'|(*:776)'
                                 .')'
                             .')'
                         .')'
                         .'|entreprise_prestataires(?'
                             .'|(?:\\.([^/]++))?(?'
-                                .'|(*:810)'
+                                .'|(*:831)'
                             .')'
                             .'|/([^/\\.]++)(?:\\.([^/]++))?(?'
-                                .'|(*:848)'
+                                .'|(*:869)'
                             .')'
                         .')'
                     .')'
@@ -117,54 +118,55 @@ return [
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         203 => [[['_route' => 'one_user_system', '_controller' => 'App\\Controller\\WarriController::one_us'], ['id'], null, null, false, true, null]],
-        225 => [[['_route' => 'block_user_system', '_controller' => 'App\\Controller\\WarriController::block_user_system'], ['cni'], null, null, false, true, null]],
-        256 => [[['_route' => 'show_one_prestataire', '_controller' => 'App\\Controller\\WarriController::show_one_prestataire'], ['id'], null, null, false, true, null]],
-        282 => [[['_route' => 'one_user_show', '_controller' => 'App\\Controller\\WarriController::show_one_user_prestataire'], ['id'], null, null, false, true, null]],
-        316 => [[['_route' => 'show_transaction', '_controller' => 'App\\Controller\\WarriController::show_trans'], ['cmpt'], null, null, false, true, null]],
-        353 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
-        384 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
-        423 => [[['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null]],
-        469 => [
+        225 => [[['_route' => 'block_user_system', '_controller' => 'App\\Controller\\WarriController::block_user_sys'], ['id'], null, null, false, true, null]],
+        246 => [[['_route' => 'edit_user_system', '_controller' => 'App\\Controller\\WarriController::edit_user_sys'], ['id'], null, null, false, true, null]],
+        277 => [[['_route' => 'show_one_prestataire', '_controller' => 'App\\Controller\\WarriController::show_one_prestataire'], ['id'], null, null, false, true, null]],
+        303 => [[['_route' => 'one_user_show', '_controller' => 'App\\Controller\\WarriController::show_one_user_prestataire'], ['id'], null, null, false, true, null]],
+        337 => [[['_route' => 'show_transaction', '_controller' => 'App\\Controller\\WarriController::show_trans'], ['cmpt'], null, null, false, true, null]],
+        374 => [[['_route' => 'api_entrypoint', '_controller' => 'api_platform.action.entrypoint', '_format' => '', '_api_respond' => 'true', 'index' => 'index'], ['index', '_format'], null, null, false, true, null]],
+        405 => [[['_route' => 'api_doc', '_controller' => 'api_platform.action.documentation', '_format' => '', '_api_respond' => 'true'], ['_format'], null, null, false, true, null]],
+        444 => [[['_route' => 'api_jsonld_context', '_controller' => 'api_platform.jsonld.action.context', '_format' => 'jsonld', '_api_respond' => 'true'], ['shortName', '_format'], null, null, false, true, null]],
+        490 => [
             [['_route' => 'api_compte_prestataires_get_collection', '_controller' => 'api_platform.action.get_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\ComptePrestataire', '_api_collection_operation_name' => 'get'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_compte_prestataires_post_collection', '_controller' => 'api_platform.action.post_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\ComptePrestataire', '_api_collection_operation_name' => 'post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        507 => [
+        528 => [
             [['_route' => 'api_compte_prestataires_get_item', '_controller' => 'api_platform.action.get_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\ComptePrestataire', '_api_item_operation_name' => 'get'], ['id', '_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_compte_prestataires_delete_item', '_controller' => 'api_platform.action.delete_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\ComptePrestataire', '_api_item_operation_name' => 'delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_compte_prestataires_put_item', '_controller' => 'api_platform.action.put_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\ComptePrestataire', '_api_item_operation_name' => 'put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
         ],
-        551 => [
+        572 => [
             [['_route' => 'api_transactions_get_collection', '_controller' => 'api_platform.action.get_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\Transaction', '_api_collection_operation_name' => 'get'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_transactions_post_collection', '_controller' => 'api_platform.action.post_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\Transaction', '_api_collection_operation_name' => 'post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        589 => [
+        610 => [
             [['_route' => 'api_transactions_get_item', '_controller' => 'api_platform.action.get_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\Transaction', '_api_item_operation_name' => 'get'], ['id', '_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_transactions_delete_item', '_controller' => 'api_platform.action.delete_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\Transaction', '_api_item_operation_name' => 'delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_transactions_put_item', '_controller' => 'api_platform.action.put_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\Transaction', '_api_item_operation_name' => 'put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
         ],
-        640 => [
+        661 => [
             [['_route' => 'api_user_prestataires_get_collection', '_controller' => 'api_platform.action.get_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserPrestataire', '_api_collection_operation_name' => 'get'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_user_prestataires_post_collection', '_controller' => 'api_platform.action.post_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserPrestataire', '_api_collection_operation_name' => 'post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        678 => [
+        699 => [
             [['_route' => 'api_user_prestataires_get_item', '_controller' => 'api_platform.action.get_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserPrestataire', '_api_item_operation_name' => 'get'], ['id', '_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_user_prestataires_delete_item', '_controller' => 'api_platform.action.delete_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserPrestataire', '_api_item_operation_name' => 'delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_user_prestataires_put_item', '_controller' => 'api_platform.action.put_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserPrestataire', '_api_item_operation_name' => 'put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
         ],
-        717 => [
+        738 => [
             [['_route' => 'api_user_systemes_get_collection', '_controller' => 'api_platform.action.get_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserSystemes', '_api_collection_operation_name' => 'get'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_user_systemes_post_collection', '_controller' => 'api_platform.action.post_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserSystemes', '_api_collection_operation_name' => 'post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        755 => [
+        776 => [
             [['_route' => 'api_user_systemes_get_item', '_controller' => 'api_platform.action.get_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserSystemes', '_api_item_operation_name' => 'get'], ['id', '_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_user_systemes_delete_item', '_controller' => 'api_platform.action.delete_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserSystemes', '_api_item_operation_name' => 'delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_user_systemes_put_item', '_controller' => 'api_platform.action.put_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\UserSystemes', '_api_item_operation_name' => 'put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],
         ],
-        810 => [
+        831 => [
             [['_route' => 'api_entreprise_prestataires_get_collection', '_controller' => 'api_platform.action.get_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\EntreprisePrestataire', '_api_collection_operation_name' => 'get'], ['_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_entreprise_prestataires_post_collection', '_controller' => 'api_platform.action.post_collection', '_format' => null, '_api_resource_class' => 'App\\Entity\\EntreprisePrestataire', '_api_collection_operation_name' => 'post'], ['_format'], ['POST' => 0], null, false, true, null],
         ],
-        848 => [
+        869 => [
             [['_route' => 'api_entreprise_prestataires_get_item', '_controller' => 'api_platform.action.get_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\EntreprisePrestataire', '_api_item_operation_name' => 'get'], ['id', '_format'], ['GET' => 0], null, false, true, null],
             [['_route' => 'api_entreprise_prestataires_delete_item', '_controller' => 'api_platform.action.delete_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\EntreprisePrestataire', '_api_item_operation_name' => 'delete'], ['id', '_format'], ['DELETE' => 0], null, false, true, null],
             [['_route' => 'api_entreprise_prestataires_put_item', '_controller' => 'api_platform.action.put_item', '_format' => null, '_api_resource_class' => 'App\\Entity\\EntreprisePrestataire', '_api_item_operation_name' => 'put'], ['id', '_format'], ['PUT' => 0], null, false, true, null],

@@ -51,6 +51,11 @@ class UserPrestataire
      */
     private $Adresse;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,6 +129,18 @@ class UserPrestataire
     public function setAdresse(string $Adresse): self
     {
         $this->Adresse = $Adresse;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

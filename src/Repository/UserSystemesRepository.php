@@ -37,9 +37,10 @@ class UserSystemesRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?UserSystemes
+    public function findOneBysomefiel($value): ?UserSystemes
     {
         return $this->createQueryBuilder('u')
+            ->select()
             ->andWhere('u.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
