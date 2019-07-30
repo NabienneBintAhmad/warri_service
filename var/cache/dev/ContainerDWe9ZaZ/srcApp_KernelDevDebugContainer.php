@@ -1,6 +1,6 @@
 <?php
 
-namespace ContainerXorNwzq;
+namespace ContainerDWe9ZaZ;
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -524,9 +524,19 @@ class srcApp_KernelDevDebugContainer extends Container
             include_once $this->targetDirs[3].'/vendor/symfony/web-profiler-bundle/Csp/ContentSecurityPolicyHandler.php';
             include_once $this->targetDirs[3].'/vendor/symfony/web-profiler-bundle/Csp/NonceGenerator.php';
             include_once $this->targetDirs[3].'/vendor/symfony/web-profiler-bundle/EventListener/WebDebugToolbarListener.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Request/ParamReaderInterface.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Request/ParamReader.php';
             include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/EventListener/BodyListener.php';
             include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Decoder/DecoderProviderInterface.php';
             include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Decoder/ContainerDecoderProvider.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/EventListener/FormatListener.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Negotiation/FormatNegotiator.php';
+            include_once $this->targetDirs[3].'/vendor/symfony/http-foundation/RequestMatcherInterface.php';
+            include_once $this->targetDirs[3].'/vendor/symfony/http-foundation/RequestMatcher.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/EventListener/ParamFetcherListener.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Request/ParamFetcherInterface.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Util/ResolverTrait.php';
+            include_once $this->targetDirs[3].'/vendor/friendsofsymfony/rest-bundle/Request/ParamFetcher.php';
             include_once $this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/EventListener/ControllerListener.php';
             include_once $this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/EventListener/ParamConverterListener.php';
             include_once $this->targetDirs[3].'/vendor/sensio/framework-extra-bundle/Request/ParamConverter/ParamConverterManager.php';
@@ -793,6 +803,12 @@ class srcApp_KernelDevDebugContainer extends Container
         $instance->addListener('kernel.request', [0 => function () {
             return ($this->privates['fos_rest.body_listener'] ?? $this->getFosRest_BodyListenerService());
         }, 1 => 'onKernelRequest'], 10);
+        $instance->addListener('kernel.request', [0 => function () {
+            return ($this->privates['fos_rest.format_listener'] ?? $this->getFosRest_FormatListenerService());
+        }, 1 => 'onKernelRequest'], 34);
+        $instance->addListener('kernel.controller', [0 => function () {
+            return ($this->privates['fos_rest.param_fetcher_listener'] ?? $this->getFosRest_ParamFetcherListenerService());
+        }, 1 => 'onKernelController'], 5);
         $instance->addListener('kernel.response', [0 => function () {
             return ($this->privates['response_listener'] ?? ($this->privates['response_listener'] = new \Symfony\Component\HttpKernel\EventListener\ResponseListener('UTF-8')));
         }, 1 => 'onKernelResponse'], 0);
@@ -901,6 +917,12 @@ class srcApp_KernelDevDebugContainer extends Container
         $instance->addListener('console.terminate', [0 => function () {
             return ($this->privates['maker.console_error_listener'] ?? ($this->privates['maker.console_error_listener'] = new \Symfony\Bundle\MakerBundle\Event\ConsoleErrorSubscriber()));
         }, 1 => 'onConsoleTerminate'], 0);
+        $instance->addListener('kernel.view', [0 => function () {
+            return ($this->privates['fos_rest.view_response_listener'] ?? $this->load('getFosRest_ViewResponseListenerService.php'));
+        }, 1 => 'onKernelView'], 30);
+        $instance->addListener('kernel.exception', [0 => function () {
+            return ($this->privates['fos_rest.access_denied_listener'] ?? ($this->privates['fos_rest.access_denied_listener'] = new \FOS\RestBundle\EventListener\AccessDeniedListener(['json' => true], NULL)));
+        }, 1 => 'onKernelException'], 5);
         $instance->addListener('kernel.controller', [0 => function () {
             return ($this->privates['sensio_framework_extra.controller.listener'] ?? $this->getSensioFrameworkExtra_Controller_ListenerService());
         }, 1 => 'onKernelController'], 0);
@@ -1660,6 +1682,40 @@ class srcApp_KernelDevDebugContainer extends Container
     }
 
     /**
+     * Gets the private 'fos_rest.format_listener' shared service.
+     *
+     * @return \FOS\RestBundle\EventListener\FormatListener
+     */
+    protected function getFosRest_FormatListenerService()
+    {
+        $a = new \FOS\RestBundle\Negotiation\FormatNegotiator(($this->services['request_stack'] ?? ($this->services['request_stack'] = new \Symfony\Component\HttpFoundation\RequestStack())));
+        $a->add(new \Symfony\Component\HttpFoundation\RequestMatcher('^/_profiler|_wdt/', NULL, NULL, NULL, []), ['methods' => NULL, 'priorities' => [0 => 'html', 1 => 'json'], 'fallback_format' => 'html', 'attributes' => [], 'prefer_extension' => '2.0']);
+        $a->add(new \Symfony\Component\HttpFoundation\RequestMatcher('^/api', NULL, NULL, NULL, []), ['prefer_extension' => '2.0', 'fallback_format' => 'json', 'priorities' => [0 => 'json'], 'methods' => NULL, 'attributes' => [], 'stop' => false]);
+
+        return $this->privates['fos_rest.format_listener'] = new \FOS\RestBundle\EventListener\FormatListener($a);
+    }
+
+    /**
+     * Gets the private 'fos_rest.param_fetcher_listener' shared service.
+     *
+     * @return \FOS\RestBundle\EventListener\ParamFetcherListener
+     */
+    protected function getFosRest_ParamFetcherListenerService()
+    {
+        return $this->privates['fos_rest.param_fetcher_listener'] = new \FOS\RestBundle\EventListener\ParamFetcherListener(new \FOS\RestBundle\Request\ParamFetcher($this, ($this->privates['fos_rest.request.param_fetcher.reader'] ?? $this->getFosRest_Request_ParamFetcher_ReaderService()), ($this->services['request_stack'] ?? ($this->services['request_stack'] = new \Symfony\Component\HttpFoundation\RequestStack())), ($this->services['validator'] ?? $this->getValidatorService())), false);
+    }
+
+    /**
+     * Gets the private 'fos_rest.request.param_fetcher.reader' shared service.
+     *
+     * @return \FOS\RestBundle\Request\ParamReader
+     */
+    protected function getFosRest_Request_ParamFetcher_ReaderService()
+    {
+        return $this->privates['fos_rest.request.param_fetcher.reader'] = new \FOS\RestBundle\Request\ParamReader(($this->privates['annotations.cached_reader'] ?? $this->getAnnotations_CachedReaderService()));
+    }
+
+    /**
      * Gets the private 'framework_extra_bundle.argument_name_convertor' shared service.
      *
      * @return \Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter
@@ -1806,9 +1862,10 @@ class srcApp_KernelDevDebugContainer extends Container
     protected function getSecurity_Authentication_ManagerService()
     {
         $this->privates['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(new RewindableGenerator(function () {
-            yield 0 => ($this->privates['security.authentication.provider.dao.main'] ?? $this->load('getSecurity_Authentication_Provider_Dao_MainService.php'));
-            yield 1 => ($this->privates['security.authentication.provider.anonymous.main'] ?? ($this->privates['security.authentication.provider.anonymous.main'] = new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider($this->getParameter('container.build_hash'))));
-        }, 2), true);
+            yield 0 => ($this->privates['security.authentication.provider.dao.login'] ?? $this->load('getSecurity_Authentication_Provider_Dao_LoginService.php'));
+            yield 1 => ($this->privates['security.authentication.provider.anonymous.login'] ?? ($this->privates['security.authentication.provider.anonymous.login'] = new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider($this->getParameter('container.build_hash'))));
+            yield 2 => ($this->privates['security.authentication.provider.guard.api'] ?? $this->load('getSecurity_Authentication_Provider_Guard_ApiService.php'));
+        }, 3), true);
 
         $instance->setEventDispatcher(($this->services['event_dispatcher'] ?? $this->getEventDispatcherService()));
 
@@ -1823,15 +1880,18 @@ class srcApp_KernelDevDebugContainer extends Container
     protected function getSecurity_Firewall_MapService()
     {
         return $this->privates['security.firewall.map'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallMap(new \Symfony\Component\DependencyInjection\Argument\ServiceLocator($this->getService, [
+            'security.firewall.map.context.api' => ['privates', 'security.firewall.map.context.api', 'getSecurity_Firewall_Map_Context_ApiService.php', true],
             'security.firewall.map.context.dev' => ['privates', 'security.firewall.map.context.dev', 'getSecurity_Firewall_Map_Context_DevService.php', true],
-            'security.firewall.map.context.main' => ['privates', 'security.firewall.map.context.main', 'getSecurity_Firewall_Map_Context_MainService.php', true],
+            'security.firewall.map.context.login' => ['privates', 'security.firewall.map.context.login', 'getSecurity_Firewall_Map_Context_LoginService.php', true],
         ], [
+            'security.firewall.map.context.api' => '?',
             'security.firewall.map.context.dev' => '?',
-            'security.firewall.map.context.main' => '?',
+            'security.firewall.map.context.login' => '?',
         ]), new RewindableGenerator(function () {
             yield 'security.firewall.map.context.dev' => ($this->privates['.security.request_matcher.Iy.T22O'] ?? ($this->privates['.security.request_matcher.Iy.T22O'] = new \Symfony\Component\HttpFoundation\RequestMatcher('^/(_(profiler|wdt)|css|images|js)/')));
-            yield 'security.firewall.map.context.main' => NULL;
-        }, 2));
+            yield 'security.firewall.map.context.login' => ($this->privates['.security.request_matcher.HeUdK73'] ?? ($this->privates['.security.request_matcher.HeUdK73'] = new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/login')));
+            yield 'security.firewall.map.context.api' => ($this->privates['.security.request_matcher.p4VlLPC'] ?? ($this->privates['.security.request_matcher.p4VlLPC'] = new \Symfony\Component\HttpFoundation\RequestMatcher('^/api')));
+        }, 3));
     }
 
     /**
@@ -2470,6 +2530,7 @@ class srcApp_KernelDevDebugContainer extends Container
             'lexik_jwt_authentication.user_id_claim' => 'username',
             'lexik_jwt_authentication.encoder.signature_algorithm' => 'RS256',
             'lexik_jwt_authentication.encoder.crypto_engine' => 'openssl',
+            'fos_rest.format_listener.rules' => NULL,
             'data_collector.templates' => [
                 'data_collector.request' => [
                     0 => 'request',
