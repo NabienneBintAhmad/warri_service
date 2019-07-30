@@ -144,6 +144,29 @@ class WarriController extends AbstractController
         return new jsonResponse("succesfull !");
     } // done !
 
+    // /**
+    //  * @Route("/system/block/{cni}",name="block_user_system")
+    //  */
+    // public function block_user_system(Request $req){
+    //     $data = $req->getContent();
+    //     $data = json_decode($data,true);
+    //     // var_dump($data);
+    //     $cni = $data['cni']; 
+    //     // echo($cni);
+
+    //     $repos = $this->getDoctrine()->getRepository(UserSystemes::class)->CreateQuerybuilder('a')
+    //         // ->Update('user_systemes','a')
+    //         ->Update()
+    //         ->Set('status','?0')
+    //         ->setParameter(0,'0')
+    //         ->where('cni = ?1')
+    //         ->setParameter(1,$cni)
+    //         ->getQuery();
+
+    //     $result=$repos->getResult(); 
+    //     return new response ("teste"); 
+    // }
+
 // ============================================== PRESTATAIRE
 
     /**
@@ -158,7 +181,7 @@ class WarriController extends AbstractController
         $maxid = ($maxidresult[0][1] + 1);
 
         $data = json_decode($request->getContent(),true);
-        $mat.="/P".$maxid;
+        $mat.="-P".$maxid;
         $prestataire = new EntreprisePrestataire;
         $prestataire->setMatricule($mat);
         $prestataire->setDenomination($data['denome']);
@@ -182,7 +205,11 @@ class WarriController extends AbstractController
 
         $prest_serialized = $this->get('serializer')->serialize($prestataires,'json');
 
-        return new Response($prest_serialized);
+        $response = new Response($prest_serialized);
+        $response->headers->set('content-type','application/json');
+        // $response->setStatusCode(Response::HTTP_CREATED);
+
+        return($response);
     } // done !
 
      /**
@@ -194,7 +221,7 @@ class WarriController extends AbstractController
 
         $prest_serialized = $this->get('serializer')->serialize($prestataires,'json');
 
-        return new Response($prest_serialized);
+        return new JsonResponse($prest_serialized);
     } // done !
 
 
@@ -289,9 +316,13 @@ class WarriController extends AbstractController
 
         $em = $this->getDoctrine()->getmanager();
         $em->persist($compte);
-        $em->flush();
 
-        return new Response ("response ");
+        if($em->flush()){
+            return new Response ("error");
+        }else{
+            return new Response ("sucessfull");
+        }
+
     }//done !
 
 
@@ -314,9 +345,9 @@ class WarriController extends AbstractController
         $trans->setDate( new \DateTime('now'));
         var_dump($trans);
 
-        // $em = $this->getDoctrine()->getmanager();
-        // $em->persist($trans);
-        // $em->flush();
+        $em = $this->getDoctrine()->getmanager();
+        $em->persist($trans);
+        $em->flush();
 
         return new Response ("response ");
     }// done !
@@ -327,10 +358,29 @@ class WarriController extends AbstractController
      */
 
      public function show_trans(Request $req,$cmpt){
-         $data = $req->getContent();
-        //  $transactions = $this->getDoctrine()->getRepository(Transactions::class)->findByCompte($cmpt);
-         var_dump($data);
+        //  $data = $req->getContent();
+         $transactions = $this->getDoctrine()->getRepository(Transaction::class)->findByCompte($cmpt);
+         var_dump($transactions);
 
          return new Response("ok");
-     }
+     }// done !
+
+    
+    // public function block(Request $request, $mat)
+    // {
+    //     $user = $this->getDoctrine()->getManager()->getRepository()->find($mat);
+
+    //     $form = $this->createForm(UserSystemes::class,$user);
+
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+
+    //         $em->flush();
+
+    //         return $this->redirectToRoute('form_add_example');
+    //     }
+
+    //     return new resonse ("ok");
+    // }
 }
