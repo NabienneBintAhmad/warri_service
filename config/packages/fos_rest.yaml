@@ -1,8 +1,13 @@
 # Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
 fos_rest: 
     routing_loader:
+<<<<<<< HEAD
         default_format: json
         include_format: false
+=======
+      default_format: json
+      include_format: false
+>>>>>>> aa00fbad4b65d2960acba7b2cb2fc861a3b2f57d
     body_listener: true
     format_listener:
         rules:
@@ -13,4 +18,8 @@ fos_rest:
     view:
         view_response_listener:  'force'
         formats: 
+<<<<<<< HEAD
             json: true
+=======
+            json: true
+>>>>>>> aa00fbad4b65d2960acba7b2cb2fc861a3b2f57d
