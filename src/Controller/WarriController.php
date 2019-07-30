@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -106,6 +107,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/add", name="add_prestataire",methods={"POST"}) 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add_prestataire(Request $request){
         $mat = date('y');
@@ -133,6 +135,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/show", name="show_prestataire") 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show_prestataire(Request $request){
         $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
@@ -144,7 +147,8 @@ class WarriController extends AbstractController
     } // done !
 
      /**
-     * @Route("/prest/show/{id}", name="show_one_prestataire") 
+     * @Route("/prest/show/{id}", name="show_one_prestataire")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show_one_prestataire(Request $request,$id){
         $prestatairerep = $this->getDoctrine()->getRepository(EntreprisePrestataire::class);
@@ -158,6 +162,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/add",name="add_user_prestataire",methods={"POST"})
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function add_user_prestataire(Request $request){
         $data = $request->getContent();
@@ -190,6 +195,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/show")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_user_prestataire(){
         $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
@@ -205,6 +211,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/user/show/{id}",name="one_user_show")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_one_user_prestataire($id){
         $userrep = $this->getDoctrine()->getRepository(UserPrestataire::class);
@@ -220,6 +227,7 @@ class WarriController extends AbstractController
     
     /**
      * @Route("/compte/show",name="show_compte")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_compte(){
         $compterep = $this->getDoctrine()->getRepository(ComptePrestataire::class);
@@ -231,6 +239,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/compte/add",name="add_compte")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add_compte(Request $request){
         $data = $request->getContent();
@@ -256,6 +265,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/transaction/add",name="add_transaction",methods={"POST"})
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function add_transaction(Request $request){
         $data = $request->getContent();
@@ -282,6 +292,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/transaction/show/{cmpt}",name="show_transaction")
+     * @IsGranted("ROLE_PRESTATAIRE")
      */
 
      public function show_trans(Request $req,$cmpt){
