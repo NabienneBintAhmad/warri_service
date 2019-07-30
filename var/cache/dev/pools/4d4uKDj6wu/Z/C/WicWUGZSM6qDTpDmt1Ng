@@ -9,7 +9,7 @@
         [
             'Symfony\\Component\\Routing\\Annotation\\Route' => [
                 'path' => [
-                    '/prest/user/show',
+                    '/prest/users/show',
                 ],
             ],
             'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\IsGranted' => [

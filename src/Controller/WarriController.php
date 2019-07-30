@@ -4,24 +4,18 @@ namespace App\Controller;
 
 
 use App\Entity\UserSystemes;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use phpDocumentor\Reflection\Types\This;
 use App\Entity\UserPrestataire;
 use App\Entity\ComptePrestataire;
 use App\Entity\Transaction;
 use App\Entity\EntreprisePrestataire;
-use Symfony\Component\Validator\Constraints\Date;
 use \DateTime;
 
 /**
@@ -96,11 +90,13 @@ class WarriController extends AbstractController
         // var_dump($dump);
         // var_dump($data);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($dump);
-        $em->flush();
+        // $em = $this->getDoctrine()->getManager();
+        // $em->persist($dump);
+        // $em->flush();
 
-        return new jsonResponse("succesfull !");
+        // return new jsonResponse("succesfull !");
+
+        
     } // done !
 
     /**
@@ -242,7 +238,7 @@ class WarriController extends AbstractController
 
 
     /**
-     * @Route("/prest/user/show")
+     * @Route("/prest/users/show")
      * @IsGranted("ROLE_PRESTATAIRE")
      */
     public function show_user_prestataire(){
@@ -270,6 +266,23 @@ class WarriController extends AbstractController
         // var_dump($prestataires);
         return new Response($user_serialized);
     } // done !
+
+    /**
+     * @Route("/prest/block/{id}",name="block_user")
+     */
+    public function block_user_prest(Request $req){
+        $data = $req->getContent();
+        $data = json_decode($data,true);
+        $id = $data['id']; 
+        $repos = $this->getDoctrine()->getRepository(UserPrestataire::class)->find($id);
+        $repos->setStatus('0');
+        // var_dump($repos);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new jsonResponse('well');
+    }
 
 // ============================================== Compte
     
