@@ -154,6 +154,6 @@ class __TwigTemplate_ab6f2812835c23bb897b8228a9ff589b6df6f5a3e0dcd91b5f57dfd71d8
     </ul>
 </div>
 {% endblock %}
-", "security/index.html.twig", "/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/templates/security/index.html.twig");
+", "security/index.html.twig", "/var/www/html/my symphon/warri_service/templates/security/index.html.twig");
     }
 }
