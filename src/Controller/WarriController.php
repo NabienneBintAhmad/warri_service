@@ -356,4 +356,3 @@ class WarriController extends AbstractController
 
     //     return new resonse ("ok");
     // }
-}
