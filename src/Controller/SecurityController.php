@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/register", name="register", methods={"POST"})
-     * @IsGranted("ROLE_SUPERADMIN")
+     *  @IsGranted("ROLE_SUPERADMIN")
      *  @IsGranted("ROLE_ADMIN")
      *  @IsGranted("ROLE_PRESTATAIRE")
      */
