@@ -78,15 +78,13 @@ class WarriController extends AbstractController
     public function system_add_user (Request $request){
         
         $data = $request->getContent();
-        $data = json_decode($data,true);
-        // var_dump($data);
-        
+        $data = json_decode($data,true);  
         $dump = new UserSystemes;
         $dump->setNom($data['nom']);
         $dump->setPrenom($data['prenom']);
         $dump->setEmail($data['email']);
-        $dump->setTelephone($data['tel']);
-        $dump->setAdresse($data['adress']);
+        $dump->setTelephone($data['telephone']);
+        $dump->setAdresse($data['adresse']);
         $dump->setCni($data['cni']);
         $dump->setStatus($data['status']);
 
@@ -251,10 +249,8 @@ class WarriController extends AbstractController
         $user = $userrep->findAll();
 
         $user_serialized = $this->get('serializer')->serialize($user,'json');
-
-        // var_dump($prestataires);
         return new Response($user_serialized);
-    } // done !
+    } 
 
     
 
@@ -301,7 +297,7 @@ class WarriController extends AbstractController
 
         $compte_serialized = $this->get('serializer')->serialize($compte,'json');
         return new Response($compte_serialized);
-    } // done !
+    } 
 
     /**
      * @Route("/compte/add",name="add_compte")

@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EntreprisePrestataireRepository")
+ * @UniqueEntity(fields={"Email","matricule"}, message="Cet utilisateur existe déjà")
  */
 class EntreprisePrestataire
 {
