@@ -9,7 +9,7 @@ class UserSystemTest extends WebTestCase
     public function testsystem_add_user()
     {
         $client = static::createClient([],[
-            'PHP_AUTH_USER'=>'nabienne@gmail.com',
+            'PHP_AUTH_USER'=>'fixture@gmail.com',
             'PHP_AUTH_PW'=>'passer1'
          ]);
         $crawler = $client->request('POST', 'api/addUsersyst',[],[],

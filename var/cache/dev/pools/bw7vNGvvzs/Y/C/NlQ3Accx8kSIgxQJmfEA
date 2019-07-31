@@ -11,7 +11,7 @@
                     [
                         'id',
                         'Denomination',
-                        'Matricule',
+                        'matricule',
                         'Email',
                         'Contacte',
                         'Adress',

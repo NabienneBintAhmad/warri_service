@@ -4,21 +4,24 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class PrestataireTest extends WebTestCase
+class UserPrestataireTest extends WebTestCase
 {
-    public function testPrestataire()
+    public function testSomething()
     {
         $client = static::createClient([],[
-            'PHP_AUTH_USER'=>'nabienne@gmail.com',
+            'PHP_AUTH_USER'=>'prestataire1@gmail.com',
             'PHP_AUTH_PW'=>'passe1'
          ]);
-        $crawler = $client->request('POST', 'api/prest/add',[],[],
+        $crawler = $client->request('POST', 'api/prest/user/add',[],[],
         ['CONTENT_TYPE' => 'application/json'],
         '{
-            "denome":"Nabienne Services",
-            "email": "gaye@hotmail.com",
-            "adress":"Ouakam",
-            "contact": 772145732
+            "matricule": "19-P1",
+            "nom": "NDIONGUE",
+            "prenom":"Lena",
+            "tel": 772145732,
+            "email": "lena@hotmail.com",
+            "adress":"Ouakam"
+           
            
             
         }');

@@ -78,6 +78,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/addUsersyst", name="add_user_sys",methods={"POST"})
+     * @IsGranted("ROLE_SUPERADMIN")
      */
 
     public function system_add_user (Request $request){
@@ -204,6 +205,7 @@ class WarriController extends AbstractController
         // $the_id_serialized = $this->get('serializer')->serialize($the_id,'json');
         // $mat_id = ($the_id);
         $mat_id = ($the_id[0]);
+        // var_dump($the_id);
 
         $user = new UserPrestataire;
         $user->setMatricule($mat_id);

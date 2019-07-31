@@ -28,7 +28,7 @@ class EntreprisePrestataire
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Matricule;
+    //private $Matricule;
 
     private $matricule;
 
