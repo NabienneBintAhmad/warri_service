@@ -13,6 +13,7 @@
                         'App\\Entity\\UserPrestataire',
                         'App\\Entity\\EntreprisePrestataire',
                         'App\\Entity\\ComptePrestataire',
+                        'App\\Entity\\Superadmin',
                         'App\\Entity\\UserSystemes',
                     ],
                 ],

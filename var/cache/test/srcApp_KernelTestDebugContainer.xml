@@ -21,6 +21,7 @@
       <parameter key="LexikJWTAuthenticationBundle">Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle</parameter>
       <parameter key="FOSRestBundle">FOS\RestBundle\FOSRestBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -70,6 +71,10 @@
       <parameter key="SensioFrameworkExtraBundle" type="collection">
         <parameter key="path">/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/sensio/framework-extra-bundle</parameter>
         <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineFixturesBundle" type="collection">
+        <parameter key="path">/home/nabienne/Bureau/doc_/N@bienne bint-Hawa/symphony/service_warri/vendor/doctrine/doctrine-fixtures-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -466,6 +471,13 @@
         <argument type="service" id=".service_locator.CDOTD6..App\Controller\SecurityController"/>
       </call>
     </service>
+    <service id="App\Controller\SuperAdminController" class="App\Controller\SuperAdminController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CDOTD6..App\Controller\SuperAdminController"/>
+      </call>
+    </service>
     <service id="App\Controller\WarriController" class="App\Controller\WarriController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -473,11 +485,22 @@
         <argument type="service" id=".service_locator.CDOTD6..App\Controller\WarriController"/>
       </call>
     </service>
+    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+    </service>
+    <service id="App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+      <argument type="service" id="security.user_password_encoder.generic"/>
+    </service>
     <service id="App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\SuperadminRepository" class="App\Repository\SuperadminRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -993,8 +1016,11 @@
         <argument key="ApiPlatform\Core\Security\ResourceAccessCheckerInterface" type="service" id="api_platform.security.resource_access_checker" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Core\Serializer\SerializerContextBuilderInterface" type="service" id="api_platform.serializer.context_builder.filter" on-invalid="ignore_uninitialized"/>
         <argument key="ApiPlatform\Core\Validator\ValidatorInterface" type="service" id="api_platform.validator" on-invalid="ignore_uninitialized"/>
+        <argument key="App\DataFixtures\AppFixtures" type="service" id="App\DataFixtures\AppFixtures" on-invalid="ignore_uninitialized"/>
+        <argument key="App\DataFixtures\UserFixtures" type="service" id="App\DataFixtures\UserFixtures" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\ComptePrestataireRepository" type="service" id="App\Repository\ComptePrestataireRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\EntreprisePrestataireRepository" type="service" id="App\Repository\EntreprisePrestataireRepository" on-invalid="ignore_uninitialized"/>
+        <argument key="App\Repository\SuperadminRepository" type="service" id="App\Repository\SuperadminRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\TransactionRepository" type="service" id="App\Repository\TransactionRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\UserPrestataireRepository" type="service" id="App\Repository\UserPrestataireRepository" on-invalid="ignore_uninitialized"/>
         <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository" on-invalid="ignore_uninitialized"/>
@@ -1258,7 +1284,7 @@
         <argument key="api_platform.validator" type="service" id="api_platform.validator" on-invalid="ignore_uninitialized"/>
         <argument key="argument_metadata_factory" type="service" id="argument_metadata_factory" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver" type="service" id="debug.argument_resolver" on-invalid="ignore_uninitialized"/>
-        <argument key="argument_resolver.controller_locator" type="service" id=".service_locator..zv2sG6" on-invalid="ignore_uninitialized"/>
+        <argument key="argument_resolver.controller_locator" type="service" id=".service_locator.HGAaKag" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.default" type="service" id="debug.argument_resolver.default" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.not_tagged_controller" type="service" id="debug.argument_resolver.not_tagged_controller" on-invalid="ignore_uninitialized"/>
         <argument key="argument_resolver.request" type="service" id="debug.argument_resolver.request" on-invalid="ignore_uninitialized"/>
@@ -1394,6 +1420,8 @@
         <argument key="doctrine.dbal.logger.chain.default" type="service" id="doctrine.dbal.logger.chain.default" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.dbal.logger.profiling.default" type="service" id="doctrine.dbal.logger.profiling.default" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.ensure_production_settings_command" type="service" id="doctrine.ensure_production_settings_command" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.fixtures.loader" type="service" id="doctrine.fixtures.loader" on-invalid="ignore_uninitialized"/>
+        <argument key="doctrine.fixtures_load_command" type="service" id="doctrine.fixtures_load_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.generate_entities_command" type="service" id="doctrine.generate_entities_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_convert_command" type="service" id="doctrine.mapping_convert_command" on-invalid="ignore_uninitialized"/>
         <argument key="doctrine.mapping_import_command" type="service" id="doctrine.mapping_import_command" on-invalid="ignore_uninitialized"/>
@@ -4234,7 +4262,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.0uCLJO_"/>
+      <argument type="service" id=".service_locator.kG25q.T"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5534,16 +5562,48 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter" public="false">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
+    <service id="doctrine.fixtures_load_command" class="Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand">
+      <tag name="console.command" command="doctrine:fixtures:load"/>
+      <argument type="service" id="doctrine.fixtures.loader"/>
+      <argument type="service" id="doctrine"/>
+      <call method="setName">
+        <argument>doctrine:fixtures:load</argument>
+      </call>
+    </service>
+    <service id="doctrine.fixtures.loader" class="Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader" public="false">
+      <argument type="service" id="service_container"/>
+      <call method="addFixtures">
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\AppFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\UserFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+        </argument>
+      </call>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SuperAdminController" class="App\Controller\SuperAdminController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SuperAdminController" class="App\Controller\SuperAdminController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SuperAdminController" class="App\Controller\SuperAdminController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\WarriController" class="App\Controller\WarriController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ComptePrestataireRepository" class="App\Repository\ComptePrestataireRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\EntreprisePrestataireRepository" class="App\Repository\EntreprisePrestataireRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\SuperadminRepository" class="App\Repository\SuperadminRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\SuperadminRepository" class="App\Repository\SuperadminRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\TransactionRepository" class="App\Repository\TransactionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserPrestataireRepository" class="App\Repository\UserPrestataireRepository" autowire="true" abstract="true"/>
@@ -5569,13 +5629,15 @@
         <argument key="ser" type="service" id="serializer"/>
       </argument>
     </service>
-    <service id=".service_locator..zv2sG6" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.HGAaKag" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\SecurityController::register" type="service" id=".service_locator.H3qnu8f"/>
+        <argument key="App\Controller\SuperAdminController::SuperAdmin" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\WarriController::allus" type="service" id=".service_locator.2bmvfb0"/>
         <argument key="App\Controller\WarriController::one_us" type="service" id=".service_locator.2bmvfb0"/>
         <argument key="App\Controller\SecurityController:register" type="service" id=".service_locator.H3qnu8f"/>
+        <argument key="App\Controller\SuperAdminController:SuperAdmin" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\WarriController:allus" type="service" id=".service_locator.2bmvfb0"/>
         <argument key="App\Controller\WarriController:one_us" type="service" id=".service_locator.2bmvfb0"/>
       </argument>
@@ -5669,11 +5731,12 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.0uCLJO_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.kG25q.T" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\ComptePrestataireRepository" type="service" id="App\Repository\ComptePrestataireRepository"/>
         <argument key="App\Repository\EntreprisePrestataireRepository" type="service" id="App\Repository\EntreprisePrestataireRepository"/>
+        <argument key="App\Repository\SuperadminRepository" type="service" id="App\Repository\SuperadminRepository"/>
         <argument key="App\Repository\TransactionRepository" type="service" id="App\Repository\TransactionRepository"/>
         <argument key="App\Repository\UserPrestataireRepository" type="service" id="App\Repository\UserPrestataireRepository"/>
         <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
@@ -5737,6 +5800,12 @@
     <service id=".service_locator.CDOTD6..App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
       <argument>App\Controller\SecurityController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CDOTD6." method="withContext"/>
+    </service>
+    <service id=".service_locator.CDOTD6..App\Controller\SuperAdminController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\SuperAdminController"/>
+      <argument>App\Controller\SuperAdminController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CDOTD6." method="withContext"/>
     </service>
@@ -5853,12 +5922,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator..zv2sG6"/>
+      <argument type="service" id=".service_locator.HGAaKag"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator..zv2sG6"/>
+      <argument type="service" id=".service_locator.HGAaKag"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -5896,7 +5965,7 @@
       <argument type="service" id="api_platform.path_segment_name_generator.underscore"/>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.2tAGzOP"/>
+      <argument type="service" id=".service_locator.0_FvmF1"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -5940,9 +6009,10 @@
         <argument key="doctrine:mapping:import">doctrine.mapping_import_command</argument>
         <argument key="lexik:jwt:check-config">lexik_jwt_authentication.check_config_command</argument>
         <argument key="lexik:jwt:generate-token">lexik_jwt_authentication.generate_token_command</argument>
+        <argument key="doctrine:fixtures:load">doctrine.fixtures_load_command</argument>
       </argument>
     </service>
-    <service id=".service_locator.2tAGzOP" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.0_FvmF1" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -5972,6 +6042,7 @@
         <argument key="doctrine.database_drop_command" type="service" id="doctrine.database_drop_command"/>
         <argument key="doctrine.database_import_command" type="service" id="doctrine.database_import_command"/>
         <argument key="doctrine.ensure_production_settings_command" type="service" id="doctrine.ensure_production_settings_command"/>
+        <argument key="doctrine.fixtures_load_command" type="service" id="doctrine.fixtures_load_command"/>
         <argument key="doctrine.generate_entities_command" type="service" id="doctrine.generate_entities_command"/>
         <argument key="doctrine.mapping_convert_command" type="service" id="doctrine.mapping_convert_command"/>
         <argument key="doctrine.mapping_import_command" type="service" id="doctrine.mapping_import_command"/>
@@ -6269,7 +6340,7 @@
     <service id="fos_rest.inflector" alias="fos_rest.inflector.doctrine"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default" public="false"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator..zv2sG6"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.HGAaKag"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>

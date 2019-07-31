@@ -25,6 +25,8 @@ use App\Entity\Transaction;
 use App\Entity\EntreprisePrestataire;
 use Symfony\Component\Validator\Constraints\Date;
 use \DateTime;
+use App\Entity\Superadmin;
+use App\Entity\SuperadminRepository;
 
 /**
      * @Route("/api")
@@ -90,6 +92,8 @@ class WarriController extends AbstractController
         $dump->setAdresse($data['adresse']);
         $dump->setCni($data['cni']);
         $dump->setStatus($data['status']);
+    
+        
 
         // $ser = $this->get('serializer');
         // $data = $ser->deserialize($dump,UserSystem::class,'json');
@@ -150,7 +154,6 @@ class WarriController extends AbstractController
         $prestataire->setContacte($data['contact']);
         $prestataire->setAdress($data['adress']);
 
-        var_dump($prestataire);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($prestataire);
