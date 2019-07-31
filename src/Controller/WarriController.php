@@ -130,7 +130,7 @@ class WarriController extends AbstractController
 
     /**
      * @Route("/prest/add", name="add_prestataire",methods={"POST"}) 
-     * @IsGranted("ROLE_ADMIN")
+     * 
      */
     public function add_prestataire(Request $request){
         $mat = date('y');
@@ -142,12 +142,15 @@ class WarriController extends AbstractController
 
         $data = json_decode($request->getContent(),true);
         $mat.="-P".$maxid;
+        // var_dump($mat);
         $prestataire = new EntreprisePrestataire;
         $prestataire->setMatricule($mat);
         $prestataire->setDenomination($data['denome']);
         $prestataire->setEmail($data['email']);
         $prestataire->setContacte($data['contact']);
         $prestataire->setAdress($data['adress']);
+
+        var_dump($prestataire);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($prestataire);
